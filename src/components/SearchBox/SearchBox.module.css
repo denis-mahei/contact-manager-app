@@ -1,0 +1,40 @@
+.searchField {
+    width: 280px;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+    left: 10px;
+    color: #dead59;
+    pointer-events: none;
+}
+
+.input {
+    padding: 10px 14px 10px 36px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background-color: transparent;
+    color: #f5f5f5;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+
+.searchField input:focus {
+    outline: none;
+    border-bottom-color: #dead59;
+    box-shadow: none;
+}
+
+.input::placeholder {
+    color: #dead59;
+    opacity: 0.6;
+    font-style: italic;
+}

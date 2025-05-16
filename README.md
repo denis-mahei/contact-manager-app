@@ -1,0 +1,1 @@
+# GoIT. React homework 07. Redux & Redux Toolkit.

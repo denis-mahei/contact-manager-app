@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    border-bottom: 2px solid #dead59;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background: radial-gradient(ellipse at center, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+.main {
+    display: flex;
+    align-items: center;
+}
+
+.logo svg {
+    font-size: 32px;
+    fill: #ffd277;
+    margin-right: 16px;
+}
+
+.title {
+    color: #ffd277;
+    text-transform: uppercase;
+}
