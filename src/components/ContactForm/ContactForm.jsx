@@ -2,8 +2,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addContact } from '../../redux/contacts/operations.js';
 import { useDispatch } from 'react-redux';
 import { MdOutlinePersonAddAlt } from 'react-icons/md';
+import { LuUserPlus } from 'react-icons/lu';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -27,7 +29,16 @@ const ContactForm = () => {
         number: values.number,
       })
     );
-
+    toast(`${values.name} was added to your contacts`, {
+      icon: (
+        <LuUserPlus
+          style={{
+            color: 'green',
+            fontSize: '1.2rem',
+          }}
+        />
+      ),
+    });
     resetForm();
   };
 

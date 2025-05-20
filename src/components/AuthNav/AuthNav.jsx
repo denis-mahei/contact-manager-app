@@ -1,22 +1,41 @@
 import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
-import css from './AuthNav.module.css';
+import Button from '@mui/material/Button';
 
 const AuthNav = () => {
   return (
     <div>
-      <NavLink
+      <Button
+        color="primary"
+        variant="text"
+        size="small"
+        component={NavLink}
         to="/register"
-        className={({ isActive }) => clsx(css.link, isActive && css.active)}
+        sx={{
+          '&.active': {
+            backgroundColor: 'primary.main', // або '#1976d2' (твій голубий)
+            color: 'white',
+          },
+        }}
       >
-        Register
-      </NavLink>
-      <NavLink
+        Sign up
+      </Button>
+
+      <Button
+        color="primary"
+        variant="text"
+        size="small"
+        component={NavLink}
         to="/login"
-        className={({ isActive }) => clsx(css.link, isActive && css.active)}
+        sx={{
+          '&.active': {
+            backgroundColor: 'primary.main',
+            color: 'white',
+            borderColor: 'primary.main',
+          },
+        }}
       >
-        Log In
-      </NavLink>
+        Sign in
+      </Button>
     </div>
   );
 };
