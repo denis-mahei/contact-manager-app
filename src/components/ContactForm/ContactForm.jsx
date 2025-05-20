@@ -1,6 +1,6 @@
-import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addContact } from '../../redux/contactsOps.js';
+import { addContact } from '../../redux/contacts/operations.js';
+import { useDispatch } from 'react-redux';
 import { MdOutlinePersonAddAlt } from 'react-icons/md';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';

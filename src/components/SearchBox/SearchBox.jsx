@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { changeFilter } from '../../redux/filtersSlice.js';
 import { useDispatch } from 'react-redux';
 import { useDebounce } from 'use-debounce';
+import { changeFilter } from '../../redux/filters/slice.js';
 import { FaSearch } from 'react-icons/fa';
 import css from './SearchBox.module.css';
 

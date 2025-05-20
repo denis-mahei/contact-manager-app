@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+    justify-content: space-between; /* Розмістити навігацію зліва, меню праворуч */
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #bfa35a, #d6bb6b); /* Золотистий градієнт */
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
