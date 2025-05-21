@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import SocialButtons from '../components/SocialButton/SocialButton.jsx';
 
 const HomePage = () => {
   return (
@@ -41,6 +42,7 @@ const HomePage = () => {
         <Typography variant="body2" color="text.disabled">
           Created by Denys Mahei
         </Typography>
+        <SocialButtons />
       </Box>
     </Box>
   );

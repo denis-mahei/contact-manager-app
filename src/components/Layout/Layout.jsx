@@ -11,7 +11,6 @@ const Layout = () => {
       }}
     >
       <AppBar />
-
       <Outlet />
     </Box>
   );

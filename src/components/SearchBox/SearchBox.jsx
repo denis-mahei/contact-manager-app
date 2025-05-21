@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'use-debounce';
 import { changeFilter } from '../../redux/filters/slice.js';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, TextField, InputAdornment } from '@mui/material';
+import { selectLoading } from '../../redux/contacts/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const SearchBox = () => {
   const [inputValue, setInputValue] = useState('');
   const [debouncedValue] = useDebounce(inputValue, 200);
   const dispatch = useDispatch();
+
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(changeFilter(debouncedValue));
@@ -68,6 +72,7 @@ const SearchBox = () => {
           },
         }}
       />
+      {loading && <Loader />}
     </Box>
   );
 };

@@ -6,12 +6,32 @@ const theme = createTheme({
     primary: {
       main: '#667eea',
     },
-    secondary: {
-      main: '#667eea',
-    },
   },
   typography: {
     fontFamily: 'Roboto, Arial, sans-serif',
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          transition: 'all 0.3s ease',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          transition: 'all 0.3s ease',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          transition: 'all 0.3s ease',
+        },
+      },
+    },
   },
 });
 

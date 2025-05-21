@@ -50,10 +50,11 @@ const Contact = ({ id, name, number }) => {
         px: 2,
         py: 1,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
         alignItems: 'center',
         color: '#fff',
-        width: '100%',
+        minWidth: '50%',
       }}
     >
       <CardContent sx={{ flexGrow: 1 }}>
@@ -61,8 +62,10 @@ const Contact = ({ id, name, number }) => {
           variant="subtitle1"
           sx={{
             display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center',
             gap: 1,
+            fontSize: 24,
           }}
         >
           <FaUserTie color="#dead59" />
@@ -73,8 +76,10 @@ const Contact = ({ id, name, number }) => {
           color="rgba(255,255,255,0.7)"
           sx={{
             display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center',
             gap: 1,
+            fontSize: 16,
           }}
         >
           <FaPhoneAlt color="#dead59" />

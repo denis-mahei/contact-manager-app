@@ -117,8 +117,12 @@ const AppBar = () => {
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                <MenuItem>Features</MenuItem>
-                <MenuItem>Testimonials</MenuItem>
+                <MenuItem component={NavLink} to="/">
+                  Home
+                </MenuItem>
+                <MenuItem component={NavLink} to="/contacts">
+                  Contacts
+                </MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button
@@ -149,11 +153,5 @@ const AppBar = () => {
       </Container>
     </MuiAppBar>
   );
-  // return (
-  //   <header className={css.header}>
-  //     <Navigation />
-  //     {isLoggedIn ? <UserMenu /> : <AuthNav />}
-  //   </header>
-  // );
 };
 export default AppBar;

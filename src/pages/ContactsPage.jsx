@@ -1,12 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from '../redux/contacts/operations.js';
 import ContactList from '../components/ContactList/ContactList.jsx';
-import ContactForm from '../components/ContactForm/ContactForm.jsx';
 import SearchBox from '../components/SearchBox/SearchBox.jsx';
 import { Container, Box, Typography } from '@mui/material';
+import { selectLoading } from '../redux/contacts/selectors.js';
+import Loader from '../components/Loader/Loader.jsx';
 
 const ContactsPage = () => {
+  const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,13 +32,14 @@ const ContactsPage = () => {
           sx={{
             color: '#fff',
             fontWeight: 600,
+            pt: 10,
           }}
         >
-          Contacts
+          <SearchBox />
         </Typography>
-        <ContactForm />
-        <SearchBox />
+
         <ContactList />
+        {isLoading && <Loader />}
       </Box>
     </Container>
   );

@@ -1,11 +1,18 @@
-import { GridLoader } from 'react-spinners';
-import css from './Loader.module.css';
+import { Box, CircularProgress } from '@mui/material';
 
 const Loader = () => {
   return (
-    <div className={css.loaderContainer}>
-      <GridLoader color="#dead59" />
-    </div>
+    <Box
+      sx={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 9999,
+      }}
+    >
+      <CircularProgress sx={{ color: '#fff' }} />
+    </Box>
   );
 };
 export default Loader;
