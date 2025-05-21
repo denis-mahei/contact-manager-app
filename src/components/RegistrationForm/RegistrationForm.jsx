@@ -19,8 +19,7 @@ const SignUpContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  padding: theme.spacing(2),
+  padding: theme.spacing(0),
 }));
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -38,7 +37,7 @@ const RegistrationForm = () => {
   const handleSubmit = async (values, action) => {
     try {
       await dispatch(register(values));
-
+      toast.success('Successful!');
       action.resetForm();
       navigate('/contacts');
     } catch (e) {

@@ -1,18 +1,42 @@
+import { Box, Typography } from '@mui/material';
+import { logout } from '../../redux/auth/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
-import { logout } from '../../redux/auth/operations.js';
+import Button from '@mui/material/Button';
+import { IoIosLogOut } from 'react-icons/io';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
   return (
-    <div>
-      <p>Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logout())}>
-        Logout
-      </button>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2,
+      }}
+    >
+      <Typography variant="body1" color="inherit">
+        Welcome, {user.name}
+      </Typography>
+      <Button
+        onClick={() => dispatch(logout())}
+        color="inherit"
+        variant="outlined"
+        size="small"
+        sx={{
+          textTransform: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+          px: 1.5,
+          py: 0.4,
+        }}
+      >
+        <IoIosLogOut style={{ fontSize: '1.2rem' }} />
+      </Button>
+    </Box>
   );
 };
 export default UserMenu;

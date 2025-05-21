@@ -19,14 +19,13 @@ const SignInContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  padding: theme.spacing(2),
+  padding: theme.spacing(0),
 }));
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 400,
   width: '100%',
-  padding: theme.spacing(3),
+  padding: theme.spacing(1),
   boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
   borderRadius: theme.shape.borderRadius,
 }));

@@ -10,7 +10,6 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { FaEdit } from 'react-icons/fa';
-import css from './EditContactModal.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editContact } from '../../redux/contacts/operations.js';
@@ -24,14 +23,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
   '& .MuiPaper-root': {
-    background: 'radial-gradient(ellipse at center, #2a2a2a 0%, #1a1a1a 100%)',
-    border: '1px solid #dead59',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-    borderRadius: 12,
+    backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    boxShadow: '0 0 12px rgba(255, 255, 255, 0.1)',
+    borderRadius: 2,
     padding: theme.spacing(2),
     maxWidth: 500,
-    color: '#ffd277',
-    fontWeight: 600,
+    color: '#fff',
   },
 }));
 
@@ -69,9 +67,17 @@ const EditContactModal = ({ id, name, number }) => {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        <FaEdit color="#1c1c1c" />
-      </Button>
+      <IconButton
+        variant="outlined"
+        onClick={handleClickOpen}
+        sx={{
+          color: '#fcfcfc',
+          p: '8px',
+          fontSize: '1.3rem',
+        }}
+      >
+        <FaEdit />
+      </IconButton>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -109,7 +115,6 @@ const EditContactModal = ({ id, name, number }) => {
             }}
             noValidate
             autoComplete="off"
-            className={css.formContainer}
           >
             <TextField
               id="outlined-basic"
@@ -119,22 +124,28 @@ const EditContactModal = ({ id, name, number }) => {
               onChange={(event) => setContactName(event.target.value)}
               sx={{
                 input: {
-                  color: '#f5f5f5',
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  color: '#fff',
+                  padding: '10px 14px',
                 },
                 '& .MuiInputLabel-root': {
-                  color: '#ffd277',
-                  fontSize: '1.1rem',
+                  color: '#fff',
+                  '&.Mui-focused': {
+                    color: '#fff',
+                  },
                 },
                 '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  borderRadius: 1,
                   '& fieldset': {
-                    borderColor: '#dead59',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
                   },
                   '&:hover fieldset': {
-                    borderColor: '#ffd277',
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
                   },
                   '&.Mui-focused fieldset': {
-                    borderColor: '#ffd277',
-                    boxShadow: '0 0 5px #dead59',
+                    borderColor: '#fff',
+                    boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
                   },
                 },
               }}
@@ -147,22 +158,28 @@ const EditContactModal = ({ id, name, number }) => {
               onChange={(event) => setContactNumber(event.target.value)}
               sx={{
                 input: {
-                  color: '#f5f5f5',
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  color: '#fff',
+                  padding: '10px 14px',
                 },
                 '& .MuiInputLabel-root': {
-                  color: '#ffd277',
-                  fontSize: '1.1rem',
+                  color: '#fff',
+                  '&.Mui-focused': {
+                    color: '#fff',
+                  },
                 },
                 '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  borderRadius: 1,
                   '& fieldset': {
-                    borderColor: '#dead59',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
                   },
                   '&:hover fieldset': {
-                    borderColor: '#ffd277',
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
                   },
                   '&.Mui-focused fieldset': {
-                    borderColor: '#ffd277',
-                    boxShadow: '0 0 5px #dead59',
+                    borderColor: '#fff',
+                    boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
                   },
                 },
               }}
@@ -170,7 +187,7 @@ const EditContactModal = ({ id, name, number }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleSave}>
+          <Button autoFocus onClick={handleSave} sx={{ color: '#fcfcfc' }}>
             Save changes
           </Button>
         </DialogActions>

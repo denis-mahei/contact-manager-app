@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { FaPhoneAlt, FaUserTie, FaTrashAlt } from 'react-icons/fa';
+import { FaPhoneAlt, FaUserTie } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
 import { deleteContact } from '../../redux/contacts/operations.js';
 import EditContactModal from '../EditContactModal/EditContactModal.jsx';
-import css from './Contact.module.css';
 import { useState } from 'react';
 import ConfirmDialog from '../ConfirmDialog/ConfirmDialog.jsx';
 import toast from 'react-hot-toast';
@@ -41,30 +42,56 @@ const Contact = ({ id, name, number }) => {
   };
 
   return (
-    <li key={id} className={css.userCard}>
-      <div>
-        <p className={css.cardItem}>
+    <Card
+      sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.06)',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        borderRadius: 2,
+        px: 2,
+        py: 1,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        color: '#fff',
+        width: '100%',
+      }}
+    >
+      <CardContent sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="subtitle1"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+          }}
+        >
           <FaUserTie color="#dead59" />
           {name}
-        </p>
-
-        <p className={css.cardItem}>
+        </Typography>
+        <Typography
+          variant="body2"
+          color="rgba(255,255,255,0.7)"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+          }}
+        >
           <FaPhoneAlt color="#dead59" />
           {number}
-        </p>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          onClick={() => handleDelete(id)}
-          className={css.deleteBtn}
-        >
-          <FaTrashAlt color="#1c1c1c" />
-        </button>
-        <div>
-          <EditContactModal id={id} name={name} number={number} />
-        </div>
+        </Typography>
+      </CardContent>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+        }}
+      >
+        <IconButton onClick={() => handleDelete(id)} sx={{ color: '#fcfcfc' }}>
+          <MdDelete />
+        </IconButton>
+        <EditContactModal id={id} name={name} number={number} />
         <ConfirmDialog
           open={confirmOpen}
           onConfirm={handleConfirmDelete}
@@ -72,8 +99,8 @@ const Contact = ({ id, name, number }) => {
           title="Delete"
           description={`Are you sure you want to delete ${name}?`}
         />
-      </div>
-    </li>
+      </Box>
+    </Card>
   );
 };
 export default Contact;

@@ -12,7 +12,7 @@ const AuthNav = () => {
         to="/register"
         sx={{
           '&.active': {
-            backgroundColor: 'primary.main', // або '#1976d2' (твій голубий)
+            backgroundColor: 'primary.main',
             color: 'white',
           },
         }}

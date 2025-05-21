@@ -6,29 +6,39 @@ const HomePage = () => {
       sx={{
         minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        px: 2,
+        alignItems: 'center',
+        p: 4,
       }}
     >
       <Box
         sx={{
-          backgroundColor: 'white',
+          backgroundColor: 'background.paper',
           borderRadius: 3,
-          boxShadow: 3,
-          p: 4,
-          maxWidth: 500,
+          boxShadow: 4,
+          p: 5,
+          maxWidth: 600,
           textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
         }}
       >
-        <Typography variant="h3" gutterBottom>
-          Welcome to Contact Book
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: 700,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          Contact Book
         </Typography>
         <Typography variant="h6" color="text.secondary">
-          A simple app to store and manage your contacts.
+          Organize your connections. Quick. Simple. Secure.
         </Typography>
-        <Typography sx={{ mt: 4 }} color="text.disabled">
+        <Typography variant="body2" color="text.disabled">
           Created by Denys Mahei
         </Typography>
       </Box>
