@@ -5,6 +5,7 @@ import {
   editContact,
   fetchContacts,
 } from './operations.js';
+import { logOut } from '../auth/operations.js';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -58,6 +59,11 @@ const contactsSlice = createSlice({
         if (index !== -1) {
           state.items[index] = action.payload;
         }
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.error = null;
+        state.loading = false;
       });
   },
 });

@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { logout } from '../../redux/auth/operations.js';
+import { logOut } from '../../redux/auth/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
 import Button from '@mui/material/Button';
@@ -21,7 +21,7 @@ const UserMenu = () => {
         Welcome, {user.name}
       </Typography>
       <Button
-        onClick={() => dispatch(logout())}
+        onClick={() => dispatch(logOut())}
         color="inherit"
         variant="outlined"
         size="small"

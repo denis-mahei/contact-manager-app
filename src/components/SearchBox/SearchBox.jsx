@@ -4,15 +4,25 @@ import { useDebounce } from 'use-debounce';
 import { changeFilter } from '../../redux/filters/slice.js';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, TextField, InputAdornment } from '@mui/material';
-import { selectLoading } from '../../redux/contacts/selectors.js';
 import Loader from '../Loader/Loader.jsx';
 
 const SearchBox = () => {
   const [inputValue, setInputValue] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   const [debouncedValue] = useDebounce(inputValue, 200);
   const dispatch = useDispatch();
 
-  const loading = useSelector(selectLoading);
+  useEffect(() => {
+    if (inputValue !== '') {
+      setIsSearching(true);
+    }
+
+    const timeout = setTimeout(() => {
+      dispatch(changeFilter(debouncedValue));
+      setIsSearching(false);
+    }, 200);
+    return () => clearTimeout(timeout);
+  }, [debouncedValue, dispatch, inputValue]);
 
   useEffect(() => {
     dispatch(changeFilter(debouncedValue));
@@ -72,7 +82,7 @@ const SearchBox = () => {
           },
         }}
       />
-      {loading && <Loader />}
+      {isSearching && <Loader />}
     </Box>
   );
 };

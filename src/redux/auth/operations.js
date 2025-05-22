@@ -1,21 +1,14 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://connections-api.goit.global/';
-
-const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
+import contactsAPI, {
+  clearAuthHeader,
+  setAuthHeader,
+} from '../../service/api.js';
 
 export const register = createAsyncThunk(
   'auth/register',
   async (credential, thunkAPI) => {
     try {
-      const res = await axios.post('/users/signup', credential);
+      const res = await contactsAPI.post('/users/signup', credential);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
@@ -28,7 +21,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credential, thunkAPI) => {
     try {
-      const res = await axios.post('/users/login', credential);
+      const res = await contactsAPI.post('/users/login', credential);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
@@ -37,9 +30,9 @@ export const login = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/users/logout');
+    await contactsAPI.post('/users/logout');
     clearAuthHeader();
   } catch (e) {
     return thunkAPI.rejectWithValue(e.message);
@@ -58,7 +51,7 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get('/users/current');
+      const res = await contactsAPI.get('/users/current');
       return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

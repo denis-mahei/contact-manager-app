@@ -11,9 +11,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { FaEdit } from 'react-icons/fa';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editContact } from '../../redux/contacts/operations.js';
 import toast from 'react-hot-toast';
+import { selectLoading } from '../../redux/contacts/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -37,7 +39,6 @@ const EditContactModal = ({ id, name, number }) => {
   const [contactName, setContactName] = useState(name);
   const [contactNumber, setContactNumber] = useState(number);
   const [open, setOpen] = React.useState(false);
-
   const dispatch = useDispatch();
 
   const handleSave = async () => {

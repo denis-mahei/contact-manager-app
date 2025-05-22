@@ -7,10 +7,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
+import { selectLoading } from '../../redux/contacts/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const ConfirmDialog = ({ onConfirm, open, title, onCancel, description }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const isLoading = useSelector(selectLoading);
 
   return (
     <React.Fragment>
@@ -74,6 +79,7 @@ const ConfirmDialog = ({ onConfirm, open, title, onCancel, description }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      {isLoading && <Loader />}
     </React.Fragment>
   );
 };

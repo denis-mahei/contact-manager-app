@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaPhoneAlt, FaUserTie } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
@@ -8,11 +8,13 @@ import { useState } from 'react';
 import ConfirmDialog from '../ConfirmDialog/ConfirmDialog.jsx';
 import toast from 'react-hot-toast';
 import { FiUserX } from 'react-icons/fi';
+import { selectLoading } from '../../redux/contacts/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const Contact = ({ id, name, number }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
-
+  const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
@@ -105,6 +107,7 @@ const Contact = ({ id, name, number }) => {
           description={`Are you sure you want to delete ${name}?`}
         />
       </Box>
+      {isLoading && <Loader />}
     </Card>
   );
 };

@@ -1,4 +1,5 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
+import { GridLoader } from 'react-spinners';
 
 const Loader = () => {
   return (
@@ -11,7 +12,7 @@ const Loader = () => {
         zIndex: 9999,
       }}
     >
-      <CircularProgress sx={{ color: '#fff' }} />
+      <GridLoader color="#ffffff" />
     </Box>
   );
 };
