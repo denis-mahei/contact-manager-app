@@ -12,7 +12,7 @@ const Loader = () => {
         zIndex: 9999,
       }}
     >
-      <GridLoader color="#ffffff" />
+      <GridLoader color="#fdfdfd" />
     </Box>
   );
 };
