@@ -9,13 +9,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { FaEdit } from 'react-icons/fa';
+import { MdModeEditOutline } from 'react-icons/md';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editContact } from '../../redux/contacts/operations.js';
 import toast from 'react-hot-toast';
-import { selectLoading } from '../../redux/contacts/selectors.js';
-import Loader from '../Loader/Loader.jsx';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -77,7 +75,7 @@ const EditContactModal = ({ id, name, number }) => {
           fontSize: '1.3rem',
         }}
       >
-        <FaEdit />
+        <MdModeEditOutline />
       </IconButton>
       <BootstrapDialog
         onClose={handleClose}

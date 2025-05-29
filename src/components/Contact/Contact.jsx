@@ -44,71 +44,76 @@ const Contact = ({ id, name, number }) => {
   };
 
   return (
-    <Card
-      sx={{
-        backgroundColor: 'rgba(255, 255, 255, 0.06)',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        borderRadius: 2,
-        px: 2,
-        py: 1,
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        color: '#fff',
-        minWidth: '50%',
-      }}
-    >
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography
-          variant="subtitle1"
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 1,
-            fontSize: 24,
-          }}
-        >
-          <FaUserTie color="#dead59" />
-          {name}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="rgba(255,255,255,0.7)"
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 1,
-            fontSize: 16,
-          }}
-        >
-          <FaPhoneAlt color="#dead59" />
-          {number}
-        </Typography>
-      </CardContent>
-      <Box
+    <>
+      {isLoading && <Loader />}
+      <Card
         sx={{
+          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: 2,
+          px: 2,
+          py: 1,
           display: 'flex',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
           alignItems: 'center',
-          gap: 1,
+          color: '#fff',
+          minWidth: '50%',
         }}
       >
-        <IconButton onClick={() => handleDelete(id)} sx={{ color: '#fcfcfc' }}>
-          <MdDelete />
-        </IconButton>
-        <EditContactModal id={id} name={name} number={number} />
-        <ConfirmDialog
-          open={confirmOpen}
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
-          title="Delete"
-          description={`Are you sure you want to delete ${name}?`}
-        />
-      </Box>
-      {isLoading && <Loader />}
-    </Card>
+        <CardContent sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 1,
+              fontSize: 24,
+            }}
+          >
+            <FaUserTie color="#dead59" />
+            {name}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="rgba(255,255,255,0.7)"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 1,
+              fontSize: 16,
+            }}
+          >
+            <FaPhoneAlt color="#dead59" />
+            {number}
+          </Typography>
+        </CardContent>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+          }}
+        >
+          <IconButton
+            onClick={() => handleDelete(id)}
+            sx={{ color: '#fcfcfc' }}
+          >
+            <MdDelete />
+          </IconButton>
+          <EditContactModal id={id} name={name} number={number} />
+          <ConfirmDialog
+            open={confirmOpen}
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+            title="Delete"
+            description={`Are you sure you want to delete ${name}?`}
+          />
+        </Box>
+      </Card>
+    </>
   );
 };
 export default Contact;

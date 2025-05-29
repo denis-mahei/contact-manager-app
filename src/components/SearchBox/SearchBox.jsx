@@ -1,33 +1,18 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
+import { selectNameFilter } from '../../redux/filters/selectors.js';
 import { changeFilter } from '../../redux/filters/slice.js';
-import SearchIcon from '@mui/icons-material/Search';
 import { Box, TextField, InputAdornment } from '@mui/material';
-import Loader from '../Loader/Loader.jsx';
+import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBox = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
-  const [debouncedValue] = useDebounce(inputValue, 200);
   const dispatch = useDispatch();
+  const filterValue = useSelector(selectNameFilter);
 
-  useEffect(() => {
-    if (inputValue !== '') {
-      setIsSearching(true);
-    }
-
-    const timeout = setTimeout(() => {
-      dispatch(changeFilter(debouncedValue));
-      setIsSearching(false);
-    }, 200);
-    return () => clearTimeout(timeout);
-  }, [debouncedValue, dispatch, inputValue]);
-
-  useEffect(() => {
-    dispatch(changeFilter(debouncedValue));
-  }, [debouncedValue, dispatch]);
-
+  const debounced = useDebouncedCallback(
+    (value) => dispatch(changeFilter(value)),
+    300
+  );
   return (
     <Box
       sx={{
@@ -38,8 +23,8 @@ const SearchBox = () => {
       <TextField
         fullWidth
         variant="filled"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        defaultValue={filterValue}
+        onChange={(e) => debounced(e.target.value)}
         placeholder="Search contacts ..."
         InputProps={{
           startAdornment: (
@@ -82,7 +67,6 @@ const SearchBox = () => {
           },
         }}
       />
-      {isSearching && <Loader />}
     </Box>
   );
 };
