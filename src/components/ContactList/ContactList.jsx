@@ -24,7 +24,11 @@ const ContactList = () => {
         component="ul"
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: {
+            xs: '1fr', // мобілка: 1 колонка
+            sm: '1fr 1fr', // >=600px: 2 колонки
+            md: '1fr 1fr 1fr', // >=900px: 3 колонки, наприклад
+          },
           gap: 2,
           listStyle: 'none',
           padding: 0,
