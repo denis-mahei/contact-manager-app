@@ -25,9 +25,9 @@ const ContactList = () => {
         sx={{
           display: 'grid',
           gridTemplateColumns: {
-            xs: '1fr', // мобілка: 1 колонка
-            sm: '1fr 1fr', // >=600px: 2 колонки
-            md: '1fr 1fr 1fr', // >=900px: 3 колонки, наприклад
+            xs: '1fr',
+            sm: '1fr 1fr',
+            md: '1fr 1fr 1fr',
           },
           gap: 2,
           listStyle: 'none',
@@ -37,7 +37,7 @@ const ContactList = () => {
       >
         <Card
           sx={{
-            height: '100%',
+            minHeight: '115px',
             minWidth: 120,
             display: 'flex',
             justifyContent: 'center',
@@ -77,7 +77,7 @@ const ContactList = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 0.5,
+                gap: 1,
                 userSelect: 'none',
               }}
             >
