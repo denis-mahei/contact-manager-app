@@ -117,10 +117,18 @@ const AppBar = () => {
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                <MenuItem component={NavLink} to="/">
+                <MenuItem
+                  component={NavLink}
+                  to="/"
+                  onClick={toggleDrawer(false)}
+                >
                   Home
                 </MenuItem>
-                <MenuItem component={NavLink} to="/contacts">
+                <MenuItem
+                  component={NavLink}
+                  to="/contacts"
+                  onClick={toggleDrawer(false)}
+                >
                   Contacts
                 </MenuItem>
                 <Divider sx={{ my: 3 }} />
