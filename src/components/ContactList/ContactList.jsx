@@ -3,12 +3,12 @@ import {
   selectFilteredContacts,
   selectLoading,
 } from '../../redux/contacts/selectors.js';
-import Contact from '../Contact/Contact.jsx';
 import { useState } from 'react';
 import { Card, CardActionArea, Box, Typography } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 import AddContactModal from '../AddContactModal/AddContactModal.jsx';
+import Contact from '../Contact/Contact.jsx';
 import Loader from '../Loader/Loader.jsx';
+import AddIcon from '@mui/icons-material/Add';
 
 const ContactList = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
