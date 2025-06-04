@@ -96,7 +96,7 @@ const Contact = ({ id, name, number }) => {
         >
           <IconButton
             onClick={() => handleDelete(id)}
-            sx={{ color: '#fcfcfc' }}
+            sx={{ color: '#f5f5f5' }}
           >
             <MdDelete />
           </IconButton>
