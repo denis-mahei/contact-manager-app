@@ -67,7 +67,7 @@ const Contact = ({ id, name, number }) => {
               display: 'flex',
               alignItems: 'center',
               gap: 1,
-              fontSize: 24,
+              fontSize: 18,
             }}
           >
             <FaUserTie color="#dead59" />
