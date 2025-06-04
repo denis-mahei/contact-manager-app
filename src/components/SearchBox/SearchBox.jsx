@@ -25,7 +25,7 @@ const SearchBox = () => {
       >
         <SearchIcon
           sx={{
-            color: '#fff',
+            color: '#f5f5f5',
             mr: 1,
             my: 0.5,
           }}
@@ -39,11 +39,11 @@ const SearchBox = () => {
           sx={{
             input: {
               background: 'transparent',
-              color: '#fff',
+              color: '#fdfdfd',
               padding: '10px 14px',
             },
             label: {
-              color: '#fff',
+              color: 'rgba(255, 255, 255, 0.6)',
               '&.Mui-focused': {
                 color: '#fff',
               },

@@ -56,7 +56,7 @@ const Contact = ({ id, name, number }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          color: '#fff',
+          color: '#fdfdfd',
           minWidth: '50%',
         }}
       >
