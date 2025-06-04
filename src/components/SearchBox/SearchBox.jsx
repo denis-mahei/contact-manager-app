@@ -39,7 +39,7 @@ const SearchBox = () => {
           sx={{
             input: {
               background: 'transparent',
-              color: '#fdfdfd',
+              color: '#f5f5f5',
               padding: '10px 14px',
             },
             label: {
@@ -66,7 +66,7 @@ const SearchBox = () => {
             '& .MuiFilledInput-root.Mui-focused': {
               border: '1px solid #fff',
               boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              backgroundColor: 'rgba(255, 255, 255, 0.09)',
             },
           }}
         />
