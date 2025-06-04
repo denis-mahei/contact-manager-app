@@ -2,13 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDebouncedCallback } from 'use-debounce';
 import { selectNameFilter } from '../../redux/filters/selectors.js';
 import { changeFilter } from '../../redux/filters/slice.js';
-import { Box, TextField, InputAdornment } from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import { Box, TextField } from '@mui/material';
 
-import * as React from 'react';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
 import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBox = () => {
