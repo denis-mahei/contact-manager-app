@@ -55,7 +55,6 @@ const Contact = ({ id, name, number }) => {
           py: 1,
           display: 'flex',
           justifyContent: 'center',
-          flexWrap: 'wrap',
           alignItems: 'center',
           color: '#fff',
           minWidth: '50%',
@@ -66,7 +65,6 @@ const Contact = ({ id, name, number }) => {
             variant="subtitle1"
             sx={{
               display: 'flex',
-              justifyContent: 'center',
               alignItems: 'center',
               gap: 1,
               fontSize: 24,
@@ -80,7 +78,6 @@ const Contact = ({ id, name, number }) => {
             color="rgba(255,255,255,0.7)"
             sx={{
               display: 'flex',
-              justifyContent: 'center',
               alignItems: 'center',
               gap: 1,
               fontSize: 16,
