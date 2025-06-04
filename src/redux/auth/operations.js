@@ -42,19 +42,15 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (persistedToken === null) {
-      return thunkAPI.rejectWithValue('Unable to fetch user!');
-    }
-
-    try {
-      setAuthHeader(persistedToken);
-      const res = await contactsAPI.get('/users/current');
-      return res.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
+    const reduxState = thunkAPI.getState();
+    setAuthHeader(reduxState.token);
+    const res = await contactsAPI.get('/users/current');
+    return res.data;
+  },
+  {
+    condition: (_, { getState }) => {
+      const token = getState().auth.token;
+      return Boolean(token);
+    },
   }
 );
