@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { persistor, store } from './redux/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Toaster } from 'react-hot-toast';
-import App from './components/App/App.jsx';
+import App from '@/App/App.jsx';
 import theme from './theme.js';
 import '@fontsource/roboto';
 import 'modern-normalize';

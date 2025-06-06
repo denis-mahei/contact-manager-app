@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import SocialButtons from '../components/SocialButton/SocialButton.jsx';
+import SocialButtons from '@/SocialButton/SocialButton.jsx';
 
 const HomePage = () => {
   return (

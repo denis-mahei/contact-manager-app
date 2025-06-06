@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from '../redux/contacts/operations.js';
-import ContactList from '../components/ContactList/ContactList.jsx';
-import SearchBox from '../components/SearchBox/SearchBox.jsx';
+import ContactList from '@/ContactList/ContactList.jsx';
+import SearchBox from '@/SearchBox/SearchBox.jsx';
 import { Container, Box, Typography } from '@mui/material';
 import { selectLoading } from '../redux/contacts/selectors.js';
-import Loader from '../components/Loader/Loader.jsx';
+import Loader from '@/Loader/Loader.jsx';
 
 const ContactsPage = () => {
   const isLoading = useSelector(selectLoading);
