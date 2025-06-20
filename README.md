@@ -27,5 +27,5 @@ A full-featured contact book with authentication and private routes, built with 
 
 ## 🔗 Live Demo
 
-[contact-manager.app](goit-react-hw-08-seven-tau-59.vercel.app)
+[contact-manager.app](contact-manager-denismahei-projects.vercel.app/)
 
