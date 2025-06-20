@@ -27,5 +27,5 @@ A full-featured contact book with authentication and private routes, built with 
 
 ## 🔗 Live Demo
 
-[contact-manager.app](contact-manager-denismahei-projects.vercel.app/)
+[📲contact-manager.app](https://contact-manager-denismahei-projects.vercel.app/)
 
