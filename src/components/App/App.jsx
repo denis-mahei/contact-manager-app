@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, lazy, Suspense } from 'react';
-import { selectIsRefreshing } from '../../redux/auth/selectors.js';
+import { lazy, Suspense, useEffect } from 'react';
+import {
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectToken,
+} from '../../redux/auth/selectors.js';
 import { refreshUser } from '../../redux/auth/operations.js';
+import { setToken } from '../../redux/auth/slice.js';
 import { PrivateRoute } from '../PrivateRoute.jsx';
 import { Route, Routes } from 'react-router-dom';
 import { RestrictedRoute } from '../RestrictedRoute.jsx';
 import Layout from '../Layout/Layout.jsx';
+import { setAuthHeader } from '../../service/api.js';
 
 const HomePage = lazy(() => import('../../pages/HomePage.jsx'));
 const RegistrationPage = lazy(() => import('../../pages/RegistrationPage.jsx'));
@@ -15,13 +21,28 @@ const ContactsPage = lazy(() => import('../../pages/ContactsPage.jsx'));
 const App = () => {
   const dispatch = useDispatch();
 
+  const token = useSelector(selectToken);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    const legacyToken = localStorage.getItem('token');
 
-  return isRefreshing ? (
+    if (legacyToken) {
+      localStorage.removeItem('token');
+      dispatch(setToken(legacyToken));
+      return;
+    }
+
+    if (token) {
+      setAuthHeader(token);
+      dispatch(refreshUser());
+    }
+  }, [dispatch, token]);
+
+  const isAuthLoading = Boolean(token) && !isLoggedIn;
+
+  return isAuthLoading || isRefreshing ? (
     <strong>Refreshing user ...</strong>
   ) : (
     <Suspense fallback={null}>

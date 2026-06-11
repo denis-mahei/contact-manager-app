@@ -89,10 +89,11 @@ const ContactList = () => {
 
         {visibleContacts.map((card) => (
           <Contact
-            key={card.id}
-            id={card.id}
+            key={card._id ?? card.id}
+            id={card._id ?? card.id}
             name={card.name}
-            number={card.number}
+            phoneNumber={card.phoneNumber}
+            contactType={card.contactType}
           />
         ))}
         <AddContactModal open={openAddModal} onClose={handleClose} />

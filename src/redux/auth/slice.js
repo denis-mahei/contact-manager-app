@@ -12,16 +12,21 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
   },
+
+  reducers: {
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, (state) => {
@@ -36,14 +41,18 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.data;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, (state) => {
+        state.user = { name: null, email: null };
+        state.token = null;
+        state.isLoggedIn = false;
         state.isRefreshing = false;
       });
   },
 });
 
+export const { setToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;
