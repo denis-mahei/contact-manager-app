@@ -18,7 +18,7 @@ const UserMenu = () => {
       }}
     >
       <Typography variant="body1" color="inherit">
-        Welcome, {user.name}
+        Welcome, name
       </Typography>
       <Button
         onClick={() => dispatch(logOut())}

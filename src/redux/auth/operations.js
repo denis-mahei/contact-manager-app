@@ -5,34 +5,34 @@ import contactsAPI, {
 } from '../../service/api.js';
 
 export const register = createAsyncThunk(
-  'auth/register',
-  async (credential, thunkAPI) => {
+  '/auth/register',
+  async ( credential, thunkAPI ) => {
     try {
-      const res = await contactsAPI.post('/users/signup', credential);
+      const res = await contactsAPI.post('/auth/register', credential);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
 );
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (credential, thunkAPI) => {
+  async ( credential, thunkAPI ) => {
     try {
-      const res = await contactsAPI.post('/users/login', credential);
+      const res = await contactsAPI.post('/auth/login', credential);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
 );
 
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logOut = createAsyncThunk('auth/logout', async ( _, thunkAPI ) => {
   try {
-    await contactsAPI.post('/users/logout');
+    await contactsAPI.post('/auth/logout');
     clearAuthHeader();
   } catch (e) {
     return thunkAPI.rejectWithValue(e.message);
@@ -41,16 +41,16 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {
+  async ( _, thunkAPI ) => {
     const reduxState = thunkAPI.getState();
     setAuthHeader(reduxState.token);
-    const res = await contactsAPI.get('/users/current');
+    const res = await contactsAPI.get('/auth/current');
     return res.data;
   },
   {
-    condition: (_, { getState }) => {
+    condition: ( _, { getState } ) => {
       const token = getState().auth.token;
       return Boolean(token);
     },
-  }
+  },
 );

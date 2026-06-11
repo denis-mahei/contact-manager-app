@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const contactsAPI = axios.create({
-  baseURL: 'https://connections-api.goit.global',
+  baseURL: 'http://localhost:3000',
 });
 
 export default contactsAPI;
 
-export const setAuthHeader = (token) => {
+export const setAuthHeader = ( token ) => {
   contactsAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
