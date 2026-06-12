@@ -49,9 +49,10 @@ const AppBar = () => {
       position="fixed"
       enableColorOnDark
       sx={{
-        boxShadow: 0,
-        bgcolor: 'transparent',
+        backgroundColor: 'transparent',
         backgroundImage: 'none',
+        boxShadow: 'none',
+        color: 'primary.main',
         mt: 'calc(var(--template-frame-height, 0px) + 28px)',
       }}
     >

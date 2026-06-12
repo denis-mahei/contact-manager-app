@@ -24,6 +24,7 @@ const Navigation = () => {
           },
           textTransform: 'uppercase',
           borderRadius: 1,
+          color: 'primary.main',
           px: 2,
           py: 0.5,
         }}

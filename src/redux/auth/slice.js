@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, login, logOut, refreshUser } from './operations.js';
+import { confirmGoogleOAuth, login, logOut, refreshUser, register } from './operations.js';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -14,22 +14,22 @@ const authSlice = createSlice({
   },
 
   reducers: {
-    setToken: (state, action) => {
+    setToken: ( state, action ) => {
       state.token = action.payload;
     },
   },
 
-  extraReducers: (builder) => {
+  extraReducers: ( builder ) => {
     builder
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, ( state, action ) => {
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, ( state, action ) => {
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
-      .addCase(logOut.fulfilled, (state) => {
+      .addCase(logOut.fulfilled, ( state ) => {
         state.user = {
           name: null,
           email: null,
@@ -37,15 +37,19 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(refreshUser.pending, (state) => {
+      .addCase(refreshUser.pending, ( state ) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
+      .addCase(confirmGoogleOAuth.fulfilled, ( state, action ) => {
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      })
+      .addCase(refreshUser.fulfilled, ( state, action ) => {
         state.user = action.payload.data;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(refreshUser.rejected, ( state ) => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;

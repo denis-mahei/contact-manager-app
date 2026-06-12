@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FaPhoneAlt, FaUserTie } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
-import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
-import { deleteContact } from '../../redux/contacts/operations.js';
+import { Box, Card, CardContent, IconButton, Typography } from '@mui/material';
+import { deleteContact, toggleFavorite } from '../../redux/contacts/operations.js';
 import EditContactModal from '../EditContactModal/EditContactModal.jsx';
 import { useState } from 'react';
 import ConfirmDialog from '../ConfirmDialog/ConfirmDialog.jsx';
@@ -10,20 +10,24 @@ import toast from 'react-hot-toast';
 import { FiUserX } from 'react-icons/fi';
 import { selectLoading } from '../../redux/contacts/selectors.js';
 import Loader from '../Loader/Loader.jsx';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
 
-const Contact = ({ id, name, number }) => {
+
+const Contact = ( { id, name, phoneNumber, contactType, isFav } ) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
+  const [favourite, setFavourite] = useState(false);
   const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
+  const handleDelete = ( id ) => {
     setContactToDelete(id);
     setConfirmOpen(true);
   };
 
-  const handleConfirmDelete = () => {
-    dispatch(deleteContact(contactToDelete));
+  const handleConfirmDelete = async () => {
+    await dispatch(deleteContact(contactToDelete));
+
     setConfirmOpen(false);
     setContactToDelete(null);
     toast(`${name} was been deleted!`, {
@@ -36,6 +40,12 @@ const Contact = ({ id, name, number }) => {
         />
       ),
     });
+  };
+
+  const handleToggleFavorite = async ( id ) => {
+    await dispatch(toggleFavorite(id));
+
+    setFavourite(prevState => !prevState);
   };
 
   const handleCancelDelete = () => {
@@ -56,8 +66,15 @@ const Contact = ({ id, name, number }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          color: '#fdfdfd',
+          color: 'primary.main',
           minWidth: '50%',
+          cursor: 'pointer',
+          transition: '0.2s',
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderColor: '#fff',
+            boxShadow: 3,
+          },
         }}
       >
         <CardContent sx={{ flexGrow: 1 }}>
@@ -68,6 +85,7 @@ const Contact = ({ id, name, number }) => {
               alignItems: 'center',
               gap: 1,
               fontSize: 18,
+              color: 'inherit',
             }}
           >
             <FaUserTie color="#dead59" />
@@ -81,26 +99,49 @@ const Contact = ({ id, name, number }) => {
               alignItems: 'center',
               gap: 1,
               fontSize: 16,
+              color: 'inherit',
             }}
           >
             <FaPhoneAlt color="#dead59" />
-            {number}
+            {phoneNumber}
           </Typography>
+          <Typography
+            variant="body2"
+            color="rgba(255,255,255,0.7)"
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              fontSize: 16,
+              color: 'inherit',
+            }}
+          >
+            <FaPhoneAlt color="#dead59" />
+            {contactType}
+          </Typography>
+
         </CardContent>
         <Box
           sx={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             gap: 1,
           }}
         >
           <IconButton
             onClick={() => handleDelete(id)}
-            sx={{ color: '#f5f5f5' }}
+            sx={{ color: '#676462' }}
           >
             <MdDelete />
           </IconButton>
-          <EditContactModal id={id} name={name} number={number} />
+          <IconButton
+            onClick={() => handleToggleFavorite(id)}
+            sx={{ color: '#ba3939' }}
+          >
+            {favourite ? <GoHeartFill /> : <GoHeart />}
+          </IconButton>
+          <EditContactModal id={id} name={name} number={phoneNumber} contactType={contactType} favour={isFav} />
           <ConfirmDialog
             open={confirmOpen}
             onConfirm={handleConfirmDelete}

@@ -3,48 +3,58 @@ import contactsAPI from '../../service/api.js';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
-  async (_, thunkAPI) => {
+  async ( _, thunkAPI ) => {
     try {
-      const response = await contactsAPI.get('/contacts');
-      return response.data.data.data;
+      const { data } = await contactsAPI.get('/contacts');
+      console.log(data.data.data);
+
+      return data.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
 );
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (newContact, thunkAPI) => {
+  async ( newContact, thunkAPI ) => {
     try {
       const response = await contactsAPI.post('/contacts', newContact);
-      return response.data.data
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
 );
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (contactId, thunkAPI) => {
+  async ( id, thunkAPI ) => {
     try {
-      const response = await contactsAPI.delete(`/contacts/${contactId}`);
-      return response.data;
+      await contactsAPI.delete(`/contacts/${id}`);
+      return id;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
+);
+
+export const toggleFavorite = createAsyncThunk(
+  'contacts/toggleFavorite',
+  async ( id ) => {
+    const response = await contactsAPI.patch(`/contacts/${id}`);
+    return response.data.data;
+  },
 );
 
 export const editContact = createAsyncThunk(
   'contacts/editContact',
-  async ({ id, contact }, thunkAPI) => {
+  async ( { id, contact }, thunkAPI ) => {
     try {
       const response = await contactsAPI.patch(`/contacts/${id}`, contact);
-      return response.data;
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
 );

@@ -5,19 +5,18 @@ import { MdOutlinePersonAddAlt } from 'react-icons/md';
 import { LuUserPlus } from 'react-icons/lu';
 import { Box, Button, TextField } from '@mui/material';
 import toast from 'react-hot-toast';
-import { addContactValidationSchema } from '../../utils/validation.js';
+import MenuItem from '@mui/material/MenuItem';
 
 const ContactForm = ( { onClose } ) => {
   const dispatch = useDispatch();
 
   const handleSubmit = ( values, { resetForm } ) => {
-    console.log(values);
     dispatch(
       addContact({
-        // id: crypto.randomUUID(),
         name: values.name,
         phoneNumber: values.phoneNumber,
         contactType: values.contactType,
+        isFavourite: values.isFavourite,
       }),
     );
 
@@ -66,7 +65,7 @@ const ContactForm = ( { onClose } ) => {
                 helperText={meta.touched && meta.error}
                 variant="filled"
                 sx={{
-                  input: {
+                  '& .MuiSelect-select': {
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
                     color: '#fff',
                   },
@@ -78,6 +77,7 @@ const ContactForm = ( { onClose } ) => {
                   },
                   '& .MuiFilledInput-root': {
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                    color: '#fff',
                     borderRadius: 1,
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                     transition: 'border 0.3s ease, box-shadow 0.3s ease',
@@ -91,6 +91,7 @@ const ContactForm = ( { onClose } ) => {
                   '& .MuiFilledInput-root.Mui-focused': {
                     boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
                     backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    color: '#fff',
                   },
                 }}
               />
@@ -141,6 +142,7 @@ const ContactForm = ( { onClose } ) => {
             {( { field, meta } ) => (
               <TextField
                 {...field}
+                select
                 label="Contact Type"
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}
@@ -161,23 +163,16 @@ const ContactForm = ( { onClose } ) => {
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
                     borderRadius: 1,
                     border: '1px solid rgba(255, 255, 255, 0.2)',
-                    transition: 'border 0.3s ease, box-shadow 0.3s ease',
-                    '&:before': {
-                      borderBottom: 'none',
-                    },
-                    '&:after': {
-                      borderBottom: 'none',
-                    },
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    color: '#fff',
                   },
                 }}
-              />
+              >
+                <MenuItem value="work">Work</MenuItem>
+                <MenuItem value="home">Home</MenuItem>
+                <MenuItem value="personal">Personal</MenuItem>
+              </TextField>
             )}
           </Field>
-
           <Button
             type="submit"
             variant="contained"

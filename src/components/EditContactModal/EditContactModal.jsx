@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -10,12 +11,11 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { MdModeEditOutline } from 'react-icons/md';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editContact } from '../../redux/contacts/operations.js';
 import toast from 'react-hot-toast';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+const BootstrapDialog = styled(Dialog)(( { theme } ) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
   },
@@ -33,7 +33,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const EditContactModal = ({ id, name, number }) => {
+const EditContactModal = ( { id, name, number } ) => {
   const [contactName, setContactName] = useState(name);
   const [contactNumber, setContactNumber] = useState(number);
   const [open, setOpen] = React.useState(false);
@@ -46,9 +46,9 @@ const EditContactModal = ({ id, name, number }) => {
           id,
           contact: {
             name: contactName,
-            number: contactNumber,
+            phoneNumber: contactNumber,
           },
-        })
+        }),
       );
       toast.success('Contact updated!');
       handleClose();
@@ -94,11 +94,11 @@ const EditContactModal = ({ id, name, number }) => {
         <IconButton
           aria-label="close"
           onClick={handleClose}
-          sx={(theme) => ({
+          sx={( theme ) => ({
             position: 'absolute',
             right: 8,
             top: 8,
-            color: theme.palette.grey[500],
+            color: theme.palette.grey[ 500 ],
           })}
         >
           <CloseIcon />
@@ -120,7 +120,7 @@ const EditContactModal = ({ id, name, number }) => {
               label="Name"
               variant="outlined"
               value={contactName}
-              onChange={(event) => setContactName(event.target.value)}
+              onChange={( event ) => setContactName(event.target.value)}
               sx={{
                 input: {
                   backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -154,7 +154,7 @@ const EditContactModal = ({ id, name, number }) => {
               label="Number"
               variant="outlined"
               value={contactNumber}
-              onChange={(event) => setContactNumber(event.target.value)}
+              onChange={( event ) => setContactNumber(event.target.value)}
               sx={{
                 input: {
                   backgroundColor: 'rgba(255, 255, 255, 0.06)',

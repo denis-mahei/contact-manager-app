@@ -1,10 +1,7 @@
 import { useSelector } from 'react-redux';
-import {
-  selectFilteredContacts,
-  selectLoading,
-} from '../../redux/contacts/selectors.js';
+import { selectFilteredContacts, selectLoading } from '../../redux/contacts/selectors.js';
 import { useState } from 'react';
-import { Card, CardActionArea, Box, Typography } from '@mui/material';
+import { Box, Card, CardActionArea, Typography } from '@mui/material';
 import AddContactModal from '../AddContactModal/AddContactModal.jsx';
 import Contact from '../Contact/Contact.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -13,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 const ContactList = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const visibleContacts = useSelector(selectFilteredContacts);
+
   const isLoading = useSelector(selectLoading);
   const handleOpen = () => setOpenAddModal(true);
   const handleClose = () => setOpenAddModal(false);
@@ -44,7 +42,7 @@ const ContactList = () => {
             alignItems: 'center',
             border: '2px solid rgba(255, 255, 255, 0.4)',
             backgroundColor: 'rgba(255, 255, 255, 0.04)',
-            color: '#fff',
+            color: 'primary.main',
             cursor: 'pointer',
             borderRadius: 3,
             boxShadow: 0,
@@ -87,13 +85,14 @@ const ContactList = () => {
           </CardActionArea>
         </Card>
 
-        {visibleContacts.map((card) => (
+        {visibleContacts.map(( card ) => (
           <Contact
             key={card._id ?? card.id}
             id={card._id ?? card.id}
             name={card.name}
             phoneNumber={card.phoneNumber}
             contactType={card.contactType}
+            isFav={card.isFavourite}
           />
         ))}
         <AddContactModal open={openAddModal} onClose={handleClose} />

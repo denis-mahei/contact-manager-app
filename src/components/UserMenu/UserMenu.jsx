@@ -7,7 +7,7 @@ import { IoIosLogOut } from 'react-icons/io';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const { name } = useSelector(selectUser);
 
   return (
     <Box
@@ -18,7 +18,7 @@ const UserMenu = () => {
       }}
     >
       <Typography variant="body1" color="inherit">
-        Welcome, name
+        Welcome, {name}!
       </Typography>
       <Button
         onClick={() => dispatch(logOut())}

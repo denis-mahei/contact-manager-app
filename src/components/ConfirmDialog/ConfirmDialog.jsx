@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { selectLoading } from '../../redux/contacts/selectors.js';
 import Loader from '../Loader/Loader.jsx';
 
-const ConfirmDialog = ({ onConfirm, open, title, onCancel, description }) => {
+const ConfirmDialog = ( { onConfirm, open, title, onCancel, description } ) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -26,12 +26,12 @@ const ConfirmDialog = ({ onConfirm, open, title, onCancel, description }) => {
         aria-labelledby="confirm-dialog-title"
         PaperProps={{
           sx: {
-            backgroundImage:
-              'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-            borderRadius: '10px',
-            color: '#fdfdfd',
+            background: 'rgba(30, 30, 30, 0.85)',
+            backdropFilter: 'blur(14px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6)',
+            borderRadius: '14px',
+            color: '#ffffff',
           },
         }}
       >
@@ -39,7 +39,7 @@ const ConfirmDialog = ({ onConfirm, open, title, onCancel, description }) => {
         <DialogContent>
           <DialogContentText
             style={{
-              color: '#ec0b0b',
+              color: 'rgba(255,255,255,0.8)',
               fontWeight: 600,
             }}
           >

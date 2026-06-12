@@ -25,7 +25,7 @@ const SearchBox = () => {
       >
         <SearchIcon
           sx={{
-            color: '#f5f5f5',
+            color: 'rgb(103 100 98)',
             mr: 1,
             my: 0.5,
           }}
@@ -39,13 +39,13 @@ const SearchBox = () => {
           sx={{
             input: {
               background: 'transparent',
-              color: '#f5f5f5',
+              color: '#676462',
               padding: '10px 14px',
             },
             label: {
               color: 'rgba(255, 255, 255, 0.6)',
               '&.Mui-focused': {
-                color: '#fff',
+                color: 'primary.main',
               },
             },
             '& .MuiFilledInput-root': {
@@ -61,6 +61,7 @@ const SearchBox = () => {
               },
               '&:hover': {
                 border: '1px solid rgba(255, 255, 255, 0.3)',
+                // color: 'primary.main',
               },
             },
             '& .MuiFilledInput-root.Mui-focused': {

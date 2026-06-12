@@ -7,7 +7,9 @@ const Layout = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%,#764ba2 100%)',
+        background:
+          'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
+        color: 'primary.main',
       }}
     >
       <AppBar />

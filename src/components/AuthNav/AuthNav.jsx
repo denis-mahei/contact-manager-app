@@ -11,6 +11,7 @@ const AuthNav = () => {
         component={NavLink}
         to="/register"
         sx={{
+          marginRight: 2,
           '&.active': {
             backgroundColor: 'primary.main',
             color: 'white',

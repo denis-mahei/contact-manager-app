@@ -4,7 +4,8 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#667eea',
+      main: '#626881',
+      bgColor: 'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
     },
   },
   typography: {

@@ -28,9 +28,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
   width: '100%',
   padding: theme.spacing(3),
   boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: 8,
   backgroundImage:
-    'linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%)',
+    'primary.bgColor',
   border: '1px solid rgba(255, 255, 255, 0.2)',
   color: '#222',
 }));
@@ -54,7 +54,9 @@ const RegistrationForm = () => {
     <SignUpContainer>
       <StyledCard>
         <CardContent>
-          <Typography variant="h5" component="h1" gutterBottom>
+          <Typography sx={{
+            color: 'primary.main',
+          }} variant="h5" component="h1" gutterBottom>
             Sign Up
           </Typography>
           <Formik
@@ -116,7 +118,7 @@ const RegistrationForm = () => {
                   fullWidth
                   sx={{ mt: 2 }}
                 >
-                  Sign Up
+                  Create account
                 </Button>
               </Form>
             )}

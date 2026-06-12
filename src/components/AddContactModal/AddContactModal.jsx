@@ -16,7 +16,6 @@ const AddContactModal = ({ open, onClose }) => (
         p: 4,
         width: '90%',
         maxWidth: 400,
-        color: '#fff',
       }}
     >
       <Box
