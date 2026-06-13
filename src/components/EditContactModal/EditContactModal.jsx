@@ -14,6 +14,7 @@ import { MdModeEditOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { editContact } from '../../redux/contacts/operations.js';
 import toast from 'react-hot-toast';
+import MenuItem from '@mui/material/MenuItem';
 
 const BootstrapDialog = styled(Dialog)(( { theme } ) => ({
   '& .MuiDialogContent-root': {
@@ -23,19 +24,19 @@ const BootstrapDialog = styled(Dialog)(( { theme } ) => ({
     padding: theme.spacing(1),
   },
   '& .MuiPaper-root': {
-    backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    boxShadow: '0 0 12px rgba(255, 255, 255, 0.1)',
-    borderRadius: 2,
-    padding: theme.spacing(2),
-    maxWidth: 500,
+    background: 'rgba(255, 255, 255, 0.08)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    borderRadius: 3,
     color: '#fff',
   },
 }));
 
-const EditContactModal = ( { id, name, number } ) => {
+const EditContactModal = ( { id, name, number, contactType } ) => {
   const [contactName, setContactName] = useState(name);
   const [contactNumber, setContactNumber] = useState(number);
+  const [type, setType] = useState(contactType);
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
@@ -47,6 +48,7 @@ const EditContactModal = ( { id, name, number } ) => {
           contact: {
             name: contactName,
             phoneNumber: contactNumber,
+            contactType: type,
           },
         }),
       );
@@ -70,7 +72,7 @@ const EditContactModal = ( { id, name, number } ) => {
         variant="outlined"
         onClick={handleClickOpen}
         sx={{
-          color: '#fcfcfc',
+          color: '#676462',
           p: '8px',
           fontSize: '1.3rem',
         }}
@@ -183,6 +185,54 @@ const EditContactModal = ( { id, name, number } ) => {
                 },
               }}
             />
+
+            <TextField
+              id="outlined-basic"
+              value={type}
+              label="Contact Type"
+              select
+              onChange={( event ) => setType(event.target.value)}
+              variant="outlined"
+              sx={{
+                input: {
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  color: '#fff',
+                  padding: '10px 14px',
+                },
+                '& .MuiSvgIcon-root': {
+                  color: '#fff',
+                },
+                '& .MuiSelect-select': {
+                  color: '#fff',
+                },
+                '& .MuiInputLabel-root': {
+                  color: '#fff',
+                  '&.Mui-focused': {
+                    color: '#fff',
+                  },
+                },
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  borderRadius: 1,
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#fff',
+                    boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
+                  },
+                },
+              }}
+            >
+              <MenuItem value="work">Work</MenuItem>
+              <MenuItem value="home">Home</MenuItem>
+              <MenuItem value="personal">Personal</MenuItem>
+            </TextField>
+
+
           </Box>
         </DialogContent>
         <DialogActions>

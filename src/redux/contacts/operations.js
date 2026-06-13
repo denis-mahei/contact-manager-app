@@ -6,7 +6,6 @@ export const fetchContacts = createAsyncThunk(
   async ( _, thunkAPI ) => {
     try {
       const { data } = await contactsAPI.get('/contacts');
-      console.log(data.data.data);
 
       return data.data.data;
     } catch (e) {
@@ -39,13 +38,6 @@ export const deleteContact = createAsyncThunk(
   },
 );
 
-export const toggleFavorite = createAsyncThunk(
-  'contacts/toggleFavorite',
-  async ( id ) => {
-    const response = await contactsAPI.patch(`/contacts/${id}`);
-    return response.data.data;
-  },
-);
 
 export const editContact = createAsyncThunk(
   'contacts/editContact',

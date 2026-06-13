@@ -16,7 +16,7 @@ const SearchBox = () => {
   );
 
   return (
-    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+    <Box>
       <Box
         sx={{
           display: 'flex',
@@ -61,7 +61,6 @@ const SearchBox = () => {
               },
               '&:hover': {
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                // color: 'primary.main',
               },
             },
             '& .MuiFilledInput-root.Mui-focused': {

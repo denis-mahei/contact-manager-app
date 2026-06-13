@@ -1,21 +1,13 @@
-import {
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  Button,
-  FormControl,
-  FormLabel,
-} from '@mui/material';
+import { Button, Card, CardContent, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../redux/auth/operations.js';
 import toast from 'react-hot-toast';
 import { registerValidationSchema } from '../../utils/validation.js';
 
-const SignUpContainer = styled('div')(({ theme }) => ({
+const SignUpContainer = styled('div')(( { theme } ) => ({
   minHeight: '100vh',
   display: 'flex',
   justifyContent: 'center',
@@ -23,7 +15,7 @@ const SignUpContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(0),
 }));
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(( { theme } ) => ({
   maxWidth: 400,
   width: '100%',
   padding: theme.spacing(3),
@@ -39,7 +31,7 @@ const RegistrationForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (values, action) => {
+  const handleSubmit = async ( values, action ) => {
     try {
       await dispatch(register(values));
       toast.success('Successful!');
@@ -52,8 +44,18 @@ const RegistrationForm = () => {
 
   return (
     <SignUpContainer>
-      <StyledCard>
-        <CardContent>
+      <StyledCard sx={{
+        background: 'rgba(255, 255, 255, 0.6)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        border: '2px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.15)',
+        borderRadius: 4,
+        p: 1,
+      }}>
+        <CardContent sx={{
+          p: 2,
+        }}>
           <Typography sx={{
             color: 'primary.main',
           }} variant="h5" component="h1" gutterBottom>
@@ -68,10 +70,12 @@ const RegistrationForm = () => {
             validationSchema={registerValidationSchema}
             onSubmit={handleSubmit}
           >
-            {({ touched, errors, handleBlur }) => (
+            {( { touched, errors, handleBlur } ) => (
               <Form>
                 <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <FormLabel htmlFor="name" sx={{
+                    mb: 1,
+                  }}>Name</FormLabel>
                   <Field
                     as={TextField}
                     id="name"
@@ -84,7 +88,9 @@ const RegistrationForm = () => {
                   />
                 </FormControl>
                 <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <FormLabel htmlFor="email" sx={{
+                    mb: 1,
+                  }}>Email</FormLabel>
                   <Field
                     as={TextField}
                     id="email"
@@ -98,7 +104,9 @@ const RegistrationForm = () => {
                   />
                 </FormControl>
                 <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel htmlFor="password" sx={{
+                    mb: 1,
+                  }}>Password</FormLabel>
                   <Field
                     as={TextField}
                     id="password"
@@ -123,7 +131,31 @@ const RegistrationForm = () => {
               </Form>
             )}
           </Formik>
+          <Typography
+
+            variant="body2"
+
+            color="text.secondary"
+
+            sx={{
+              textAlign: 'center',
+              my: 2,
+              position: 'relative',
+            }}
+          >
+            OR
+          </Typography>
+          <Button
+            variant="outlined"
+            color="primary"
+            fullWidth
+            component={Link}
+            to="/login"
+          >
+            Already have an account? Sign in
+          </Button>
         </CardContent>
+
       </StyledCard>
     </SignUpContainer>
   );

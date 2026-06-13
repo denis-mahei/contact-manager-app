@@ -56,7 +56,14 @@ const LoginForm = () => {
 
   return (
     <SignInContainer>
-      <StyledCard>
+      <StyledCard sx={{
+        background: 'rgba(255, 255, 255, 0.6)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        border: '2px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.15)',
+        borderRadius: 4,
+      }}>
         <CardContent>
           <Typography sx={{
             color: 'primary.main',
@@ -74,7 +81,9 @@ const LoginForm = () => {
             {( { touched, errors, handleBlur } ) => (
               <Form>
                 <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <FormLabel htmlFor="email" sx={{
+                    mb: 1,
+                  }}>Email</FormLabel>
                   <Field
                     as={TextField}
                     id="email"
@@ -91,7 +100,9 @@ const LoginForm = () => {
                 </FormControl>
 
                 <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel htmlFor="password" sx={{
+                    mb: 1,
+                  }}>Password</FormLabel>
                   <Field
                     as={TextField}
                     id="password"

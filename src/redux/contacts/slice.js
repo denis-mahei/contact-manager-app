@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, editContact, fetchContacts, toggleFavorite } from './operations.js';
+import { addContact, deleteContact, editContact, fetchContacts } from './operations.js';
 import { logOut } from '../auth/operations.js';
 
 const contactsSlice = createSlice({
@@ -51,18 +51,8 @@ const contactsSlice = createSlice({
         const index = state.items.findIndex(
           ( item ) => item._id === action.payload._id,
         );
-
         if (index !== -1) {
           state.items[ index ] = action.payload;
-        }
-      })
-      .addCase(toggleFavorite.fulfilled, ( state, action ) => {
-        const updated = action.payload;
-
-        const index = state.items.findIndex(c => c._id === updated._id);
-
-        if (index !== -1) {
-          state.items[ index ] = updated;
         }
       })
       .addCase(logOut.fulfilled, ( state ) => {

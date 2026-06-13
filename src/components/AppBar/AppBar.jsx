@@ -20,7 +20,8 @@ import AuthNav from '../AuthNav/AuthNav.jsx';
 import Navigation from '../Navigation/Navigation.jsx';
 import { NavLink } from 'react-router-dom';
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+
+const StyledToolbar = styled(Toolbar)(( { theme } ) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -32,7 +33,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   backgroundColor: theme.vars
     ? `rgba(${theme.vars.palette.background.defaultChannel} / 0.4)`
     : alpha(theme.palette.background.default, 0.4),
-  boxShadow: (theme.vars || theme).shadows[1],
+  boxShadow: (theme.vars || theme).shadows[ 1 ],
   padding: '8px 12px',
 }));
 
@@ -40,7 +41,7 @@ const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (newOpen) => () => {
+  const toggleDrawer = ( newOpen ) => () => {
     setOpen(newOpen);
   };
 
@@ -50,14 +51,21 @@ const AppBar = () => {
       enableColorOnDark
       sx={{
         backgroundColor: 'transparent',
-        backgroundImage: 'none',
-        boxShadow: 'none',
         color: 'primary.main',
+        boxShadow: 'none',
         mt: 'calc(var(--template-frame-height, 0px) + 28px)',
       }}
     >
       <Container maxWidth="lg">
-        <StyledToolbar variant="dense" disableGutters>
+        <StyledToolbar variant="dense" disableGutters
+                       sx={{
+                         background: 'rgba(255, 255, 255, 0.02)',
+                         backdropFilter: 'blur(5px)',
+                         WebkitBackdropFilter: 'blur(8px)',
+                         border: '2px solid rgba(255, 255, 255, 0.15)',
+                         boxShadow: '0 20px 70px rgba(0, 0, 0, 0.25)',
+                       }}
+        >
           <Box
             sx={{
               flexGrow: 1,
@@ -85,6 +93,7 @@ const AppBar = () => {
               display: {
                 xs: 'flex',
                 md: 'none',
+                backgroundColor: 'transparent',
               },
               gap: 1,
             }}
@@ -98,14 +107,21 @@ const AppBar = () => {
               onClose={toggleDrawer(false)}
               PaperProps={{
                 sx: {
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  backdropFilter: 'blur(4px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
+                  borderRadius: '0px 0px 10px 10px',
                   top: 'var(--template-frame-height, 0px)',
+
                 },
               }}
             >
               <Box
                 sx={{
                   p: 2,
-                  backgroundColor: 'background.default',
+                  color: 'white',
                 }}
               >
                 <Box
@@ -115,7 +131,7 @@ const AppBar = () => {
                   }}
                 >
                   <IconButton onClick={toggleDrawer(false)}>
-                    <CloseRoundedIcon />
+                    <CloseRoundedIcon color="white" />
                   </IconButton>
                 </Box>
                 <MenuItem
@@ -132,6 +148,7 @@ const AppBar = () => {
                 >
                   Contacts
                 </MenuItem>
+
                 <Divider sx={{ my: 3 }} />
                 {isLoggedIn ? (
                   <UserMenu />
@@ -139,8 +156,8 @@ const AppBar = () => {
                   <>
                     <MenuItem>
                       <Button
-                        color="primary"
-                        variant="contained"
+                        color="inherit"
+                        variant="outlined"
                         fullWidth
                         component={NavLink}
                         to="/register"
@@ -150,7 +167,7 @@ const AppBar = () => {
                     </MenuItem>
                     <MenuItem>
                       <Button
-                        color="primary"
+                        color="inherit"
                         variant="outlined"
                         fullWidth
                         component={NavLink}

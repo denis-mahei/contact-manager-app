@@ -2,7 +2,7 @@ import { Box, Modal } from '@mui/material';
 import ContactForm from '../ContactForm/ContactForm.jsx';
 import { IoMdContact } from 'react-icons/io';
 
-const AddContactModal = ({ open, onClose }) => (
+const AddContactModal = ( { open, onClose } ) => (
   <Modal open={open} onClose={onClose}>
     <Box
       sx={{
@@ -10,12 +10,23 @@ const AddContactModal = ({ open, onClose }) => (
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        borderRadius: 2,
+        background: 'rgba(255, 255, 255, 0.06)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '2px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
+        borderRadius: 4,
         p: 4,
         width: '90%',
         maxWidth: 400,
+        overflow: 'hidden',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.03) 45%, transparent 70%)',
+          pointerEvents: 'none',
+        },
       }}
     >
       <Box

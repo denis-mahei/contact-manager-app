@@ -7,14 +7,14 @@ const HomePage = () => {
       sx={{
         background:
           'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
-        minHeight: '100vh',
         display: 'flex',
+        // minHeight: '100vh',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'primary.main',
-        p: 4,
       }}
     >
+
       <Box
         sx={{
           backgroundColor: 'background.paper',
@@ -26,7 +26,7 @@ const HomePage = () => {
             top: '-150%',
             left: '-150%',
             width: '80%',
-            height: '400%',
+            height: '100%',
             background:
               'linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%)',
             transform: 'rotate(25deg)',
