@@ -1,20 +1,17 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import SocialButtons from '@/SocialButton/SocialButton.jsx';
 
 const HomePage = () => {
   return (
-    <Box
+    <Container
       sx={{
-        background:
-          'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
         display: 'flex',
-        // minHeight: '100vh',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'primary.main',
+        maxWidth: '555px',
       }}
     >
-
       <Box
         sx={{
           backgroundColor: 'background.paper',
@@ -27,8 +24,6 @@ const HomePage = () => {
             left: '-150%',
             width: '80%',
             height: '100%',
-            background:
-              'linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%)',
             transform: 'rotate(25deg)',
             animation: 'cardShine 8s linear infinite',
           },
@@ -43,7 +38,7 @@ const HomePage = () => {
           },
           borderRadius: 4,
           boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
-          p: 5,
+          p: 3,
           maxWidth: 700,
           width: '100%',
           transition: 'transform .2s ease, box-shadow .2s ease',
@@ -91,7 +86,7 @@ const HomePage = () => {
         </Typography>
         <SocialButtons />
       </Box>
-    </Box>
+    </Container>
   );
 };
 export default HomePage;

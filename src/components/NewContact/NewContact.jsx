@@ -9,11 +9,7 @@ const NewContact = () => {
   const handleClose = () => setOpenAddModal(false);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-      }}
-    >
+    <Box>
       <Card sx={{
         backgroundColor: 'transparent',
         cursor: 'pointer',
@@ -30,7 +26,7 @@ const NewContact = () => {
             display: 'flex',
             alignItems: 'center',
             gap: 1,
-            p: 1.5,
+            p: { xs: .5, md: 1.5 },
           }}
         >
           <RiAddFill size={36} color="#676462" />

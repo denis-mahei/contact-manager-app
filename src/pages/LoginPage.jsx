@@ -1,10 +1,7 @@
 import LoginForm from '@/LoginForm/LoginForm.jsx';
 
 const LoginPage = () => {
-  return (
-    <>
-      <LoginForm />
-    </>
-  );
+  return <LoginForm />;
+
 };
 export default LoginPage;

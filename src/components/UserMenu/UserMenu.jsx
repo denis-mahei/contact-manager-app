@@ -4,12 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
 import Button from '@mui/material/Button';
 import { IoIosLogOut } from 'react-icons/io';
-import { selectFavouriteContacts } from '../../redux/contacts/selectors.js';
-import Favorite from '../Favorite/Favorite.jsx';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavouriteContacts);
   const { name } = useSelector(selectUser);
 
   return (
@@ -23,9 +20,6 @@ const UserMenu = () => {
 
       <Typography variant="body1" color="inherit">
         Welcome, {name}!
-      </Typography>
-      <Typography variant="button" color='textPrimary'>
-        <Favorite isfav={favorites} />
       </Typography>
       <Button
         onClick={() => dispatch(logOut())}
