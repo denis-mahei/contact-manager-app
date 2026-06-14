@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebouncedCallback } from 'use-debounce';
 import { selectNameFilter } from '../../redux/filters/selectors.js';
-import { changeFilter } from '../../redux/filters/slice.js';
+import { changeNameFilter } from '../../redux/filters/slice.js';
 import { Box, TextField } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,16 +11,16 @@ const SearchBox = () => {
   const filterValue = useSelector(selectNameFilter);
 
   const debounced = useDebouncedCallback(
-    (value) => dispatch(changeFilter(value)),
-    300
+    ( value ) => dispatch(changeNameFilter(value)),
+    300,
   );
 
   return (
-    <Box>
       <Box
         sx={{
           display: 'flex',
           alignItems: 'flex-end',
+          width: { xs: '50%', md: 'auto' }
         }}
       >
         <SearchIcon
@@ -35,7 +35,7 @@ const SearchBox = () => {
           label="Search contacts..."
           variant="standard"
           defaultValue={filterValue}
-          onChange={(e) => debounced(e.target.value)}
+          onChange={( e ) => debounced(e.target.value)}
           sx={{
             input: {
               background: 'transparent',
@@ -71,7 +71,6 @@ const SearchBox = () => {
           }}
         />
       </Box>
-    </Box>
   );
 };
 export default SearchBox;

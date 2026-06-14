@@ -1,10 +1,6 @@
 import RegistrationForm from '@/RegistrationForm/RegistrationForm.jsx';
 
 const RegistrationPage = () => {
-  return (
-    <>
-      <RegistrationForm />
-    </>
-  );
+  return <RegistrationForm />;
 };
 export default RegistrationPage;

@@ -1,31 +1,12 @@
-import { Button, Card, CardContent, FormControl, FormLabel, TextField, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../redux/auth/operations.js';
 import toast from 'react-hot-toast';
 import { registerValidationSchema } from '../../utils/validation.js';
+import AuthWrapper from '../Auth/AuthWrapper.jsx';
 
-const SignUpContainer = styled('div')(( { theme } ) => ({
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: theme.spacing(0),
-}));
-
-const StyledCard = styled(Card)(( { theme } ) => ({
-  maxWidth: 400,
-  width: '100%',
-  padding: theme.spacing(3),
-  boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
-  borderRadius: 8,
-  backgroundImage:
-    'primary.bgColor',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  color: '#222',
-}));
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -42,122 +23,107 @@ const RegistrationForm = () => {
     }
   };
 
+
   return (
-    <SignUpContainer>
-      <StyledCard sx={{
-        background: 'rgba(255, 255, 255, 0.6)',
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        border: '2px solid rgba(255, 255, 255, 0.2)',
-        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.15)',
-        borderRadius: 4,
-        p: 1,
-      }}>
-        <CardContent sx={{
-          p: 2,
-        }}>
-          <Typography sx={{
-            color: 'primary.main',
-          }} variant="h5" component="h1" gutterBottom>
-            Sign Up
-          </Typography>
-          <Formik
-            initialValues={{
-              name: '',
-              email: '',
-              password: '',
-            }}
-            validationSchema={registerValidationSchema}
-            onSubmit={handleSubmit}
-          >
-            {( { touched, errors, handleBlur } ) => (
-              <Form>
-                <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="name" sx={{
-                    mb: 1,
-                  }}>Name</FormLabel>
-                  <Field
-                    as={TextField}
-                    id="name"
-                    name="name"
-                    variant="outlined"
-                    size="small"
-                    helperText={<ErrorMessage name="name" />}
-                    error={touched.name && Boolean(errors.name)}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
-                <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="email" sx={{
-                    mb: 1,
-                  }}>Email</FormLabel>
-                  <Field
-                    as={TextField}
-                    id="email"
-                    name="email"
-                    type="email"
-                    variant="outlined"
-                    size="small"
-                    helperText={<ErrorMessage name="email" />}
-                    error={touched.email && Boolean(errors.email)}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
-                <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="password" sx={{
-                    mb: 1,
-                  }}>Password</FormLabel>
-                  <Field
-                    as={TextField}
-                    id="password"
-                    name="password"
-                    type="password"
-                    variant="outlined"
-                    size="small"
-                    helperText={<ErrorMessage name="password" />}
-                    error={touched.password && Boolean(errors.password)}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  sx={{ mt: 2 }}
-                >
-                  Create account
-                </Button>
-              </Form>
-            )}
-          </Formik>
-          <Typography
+    <AuthWrapper>
+      <Typography variant="h5" gutterBottom>
+        Sign Up
+      </Typography>
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          password: '',
+        }}
+        validationSchema={registerValidationSchema}
+        onSubmit={handleSubmit}
+      >
+        {( { touched, errors, handleBlur } ) => (
+          <Form>
+            <FormControl fullWidth sx={{ mb: 1 }}>
+              <FormLabel htmlFor="name" sx={{
+                mb: 1,
+              }}>Name</FormLabel>
+              <Field
+                as={TextField}
+                id="name"
+                name="name"
+                variant="outlined"
+                size="small"
+                helperText={<ErrorMessage name="name" />}
+                error={touched.name && Boolean(errors.name)}
+                onBlur={handleBlur}
+              />
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <FormLabel htmlFor="email" sx={{
+                mb: 1,
+              }}>Email</FormLabel>
+              <Field
+                as={TextField}
+                id="email"
+                name="email"
+                type="email"
+                variant="outlined"
+                size="small"
+                helperText={<ErrorMessage name="email" />}
+                error={touched.email && Boolean(errors.email)}
+                onBlur={handleBlur}
+              />
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <FormLabel htmlFor="password" sx={{
+                mb: 1,
+              }}>Password</FormLabel>
+              <Field
+                as={TextField}
+                id="password"
+                name="password"
+                type="password"
+                variant="outlined"
+                size="small"
+                helperText={<ErrorMessage name="password" />}
+                error={touched.password && Boolean(errors.password)}
+                onBlur={handleBlur}
+              />
+            </FormControl>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: '1rem' }}
+            >
+              Create account
+            </Button>
+          </Form>
+        )}
+      </Formik>
+      <Typography
 
-            variant="body2"
+        variant="body2"
 
-            color="text.secondary"
+        color="text.secondary"
 
-            sx={{
-              textAlign: 'center',
-              my: 2,
-              position: 'relative',
-            }}
-          >
-            OR
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            fullWidth
-            component={Link}
-            to="/login"
-          >
-            Already have an account? Sign in
-          </Button>
-        </CardContent>
+        sx={{
+          textAlign: 'center',
+          my: 2,
+          position: 'relative',
+        }}
+      >
+        OR
+      </Typography>
+      <Button
+        variant="outlined"
+        color="primary"
+        fullWidth
+        component={Link}
+        to="/login"
+      >
+        Already have an account? Sign in
+      </Button>
 
-      </StyledCard>
-    </SignUpContainer>
+    </AuthWrapper>
   );
 };
 export default RegistrationForm;

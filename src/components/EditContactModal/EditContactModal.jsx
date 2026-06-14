@@ -24,11 +24,12 @@ const BootstrapDialog = styled(Dialog)(( { theme } ) => ({
     padding: theme.spacing(1),
   },
   '& .MuiPaper-root': {
-    background: 'rgba(255, 255, 255, 0.08)',
+    background: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-    borderRadius: 3,
+    WebkitBackdropFilter: 'blur(20px)',
+    border: '2px solid rgba(255, 255, 255, 0.2)',
+    borderRadius: 15,
+    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 10px rgba(255, 255, 255, 0.15)',
     color: '#fff',
   },
 }));

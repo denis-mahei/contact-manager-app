@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { selectFilteredContacts, selectLoading } from '../../redux/contacts/selectors.js';
-import { Box } from '@mui/material';
+import { selectFilteredContacts } from '../../redux/contacts/selectors.js';
+import { Box, Typography } from '@mui/material';
 import Contact from '../Contact/Contact.jsx';
-import Loader from '../Loader/Loader.jsx';
 
 
 const ContactList = () => {
 
   const visibleContacts = useSelector(selectFilteredContacts);
-  const isLoading = useSelector(selectLoading);
+  // const isLoading = useSelector(selectLoading);
 
 
   return (
     <>
-      {isLoading && <Loader />}
       <Box
         component="ul"
         sx={{
@@ -27,7 +25,7 @@ const ContactList = () => {
           margin: 0,
         }}
       >
-        {visibleContacts.map(( card ) => (
+        {visibleContacts.length > 0 ? (visibleContacts.map(( card ) => (
           <Contact
             key={card._id ?? card.id}
             id={card._id ?? card.id}
@@ -38,7 +36,9 @@ const ContactList = () => {
             contact={card.contact}
             photo={card.photo}
           />
-        ))}
+        ))) : <Typography variant="h5" sx={{ textAlign: 'center' }}>
+          No contacts yet.
+        </Typography>}
 
       </Box>
     </>

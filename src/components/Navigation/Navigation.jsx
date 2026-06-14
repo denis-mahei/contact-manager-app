@@ -6,6 +6,7 @@ import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <Box
       sx={{
@@ -24,6 +25,7 @@ const Navigation = () => {
           },
           textTransform: 'uppercase',
           borderRadius: 1,
+          border: '1px solid rgba(255,255,255,0.6)',
           color: 'primary.main',
           px: 2,
           py: 0.5,
@@ -44,6 +46,7 @@ const Navigation = () => {
             },
             textTransform: 'uppercase',
             borderRadius: 1,
+            border: '1px solid rgba(255,255,255,0.6)',
             px: 2,
             py: 0.5,
           }}

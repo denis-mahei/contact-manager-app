@@ -4,7 +4,6 @@ import { alpha, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
@@ -19,6 +18,9 @@ import UserMenu from '../UserMenu/UserMenu.jsx';
 import AuthNav from '../AuthNav/AuthNav.jsx';
 import Navigation from '../Navigation/Navigation.jsx';
 import { NavLink } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import Favorite from '../Favorite/Favorite.jsx';
+import { selectFavouriteContacts } from '../../redux/contacts/selectors.js';
 
 
 const StyledToolbar = styled(Toolbar)(( { theme } ) => ({
@@ -40,7 +42,7 @@ const StyledToolbar = styled(Toolbar)(( { theme } ) => ({
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [open, setOpen] = React.useState(false);
-
+  const favorites = useSelector(selectFavouriteContacts);
   const toggleDrawer = ( newOpen ) => () => {
     setOpen(newOpen);
   };
@@ -98,6 +100,11 @@ const AppBar = () => {
               gap: 1,
             }}
           >
+            {isLoggedIn && (
+              <Typography variant="button" color="textPrimary">
+                <Favorite isfav={favorites} />
+              </Typography>
+            )}
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
@@ -131,7 +138,7 @@ const AppBar = () => {
                   }}
                 >
                   <IconButton onClick={toggleDrawer(false)}>
-                    <CloseRoundedIcon color="white" />
+                    <CloseRoundedIcon sx={{ color: '#fff' }} />
                   </IconButton>
                 </Box>
                 <MenuItem
@@ -148,33 +155,30 @@ const AppBar = () => {
                 >
                   Contacts
                 </MenuItem>
-
                 <Divider sx={{ my: 3 }} />
                 {isLoggedIn ? (
                   <UserMenu />
                 ) : (
                   <>
-                    <MenuItem>
-                      <Button
-                        color="inherit"
-                        variant="outlined"
-                        fullWidth
-                        component={NavLink}
-                        to="/register"
-                      >
-                        Sign up
-                      </Button>
+                    <MenuItem
+                      color="inherit"
+                      variant="outlined"
+                      fullWidth
+                      component={NavLink}
+                      to="/register"
+                      onClick={toggleDrawer(false)}
+                    >
+                      Sign up
                     </MenuItem>
-                    <MenuItem>
-                      <Button
-                        color="inherit"
-                        variant="outlined"
-                        fullWidth
-                        component={NavLink}
-                        to="/login"
-                      >
-                        Sign in
-                      </Button>
+                    <MenuItem
+                      color="inherit"
+                      variant="outlined"
+                      fullWidth
+                      component={NavLink}
+                      to="/login"
+                      onClick={toggleDrawer(false)}
+                    >
+                      Sign in
                     </MenuItem>
                   </>
                 )}

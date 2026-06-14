@@ -2,30 +2,12 @@ import { Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getGoogleAuthUrl, login } from '../../redux/auth/operations.js';
-import { Button, Card, CardContent, FormControl, FormLabel, TextField, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import toast from 'react-hot-toast';
 import { loginValidationSchema } from '../../utils/validation.js';
 import { FcGoogle } from 'react-icons/fc';
-
-const SignInContainer = styled('div')(( { theme } ) => ({
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: theme.spacing(0),
-}));
-
-const StyledCard = styled(Card)(( { theme } ) => ({
-  maxWidth: 400,
-  width: '100%',
-  padding: theme.spacing(1),
-  boxShadow: '0 8px 16px rgba(0,0,0,0.3)',
-  borderRadius: 8,
-  backgroundColor: 'primary.bgColor',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  color: '#222',
-}));
+import AuthWrapper from '../Auth/AuthWrapper.jsx';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -55,118 +37,100 @@ const LoginForm = () => {
   };
 
   return (
-    <SignInContainer>
-      <StyledCard sx={{
-        background: 'rgba(255, 255, 255, 0.6)',
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        border: '2px solid rgba(255, 255, 255, 0.2)',
-        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.15)',
-        borderRadius: 4,
-      }}>
-        <CardContent>
-          <Typography sx={{
-            color: 'primary.main',
-          }} variant="h5" component="h1" gutterBottom>
-            Sign In
-          </Typography>
-          <Formik
-            initialValues={{
-              email: '',
-              password: '',
-            }}
-            onSubmit={handleSubmit}
-            validationSchema={loginValidationSchema}
-          >
-            {( { touched, errors, handleBlur } ) => (
-              <Form>
-                <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="email" sx={{
-                    mb: 1,
-                  }}>Email</FormLabel>
-                  <Field
-                    as={TextField}
-                    id="email"
-                    name="email"
-                    type="email"
-                    variant="outlined"
-                    size="small"
-                    helperText={
-                      touched.email && errors.email ? errors.email : ''
-                    }
-                    error={touched.email && Boolean(errors.email)}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+    <AuthWrapper>
 
-                <FormControl fullWidth margin="normal">
-                  <FormLabel htmlFor="password" sx={{
-                    mb: 1,
-                  }}>Password</FormLabel>
-                  <Field
-                    as={TextField}
-                    id="password"
-                    name="password"
-                    type="password"
-                    variant="outlined"
-                    size="small"
-                    helperText={
-                      touched.password && errors.password ? errors.password : ''
-                    }
-                    error={touched.password && Boolean(errors.password)}
-                    onBlur={handleBlur}
-                  />
-                </FormControl>
+      <Typography sx={{
+        color: 'primary.main',
+      }} variant="h5" component="h1" gutterBottom>
+        Sign In
+      </Typography>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={loginValidationSchema}
+      >
+        {( { touched, errors, handleBlur } ) => (
+          <Form>
+            <FormControl fullWidth margin="normal">
+              <FormLabel htmlFor="email" sx={{
+                mb: 1,
+              }}>Email</FormLabel>
+              <Field
+                as={TextField}
+                id="email"
+                name="email"
+                type="email"
+                variant="outlined"
+                size="small"
+                helperText={
+                  touched.email && errors.email ? errors.email : ''
+                }
+                error={touched.email && Boolean(errors.email)}
+                onBlur={handleBlur}
+              />
+            </FormControl>
 
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  sx={{ mt: 2, py: 1, border: '1px solid primary.main' }}
-                >
-                  Sign in
-                </Button>
-              </Form>
-            )}
-          </Formik>
-          <Typography
+            <FormControl fullWidth margin="normal">
+              <FormLabel htmlFor="password" sx={{
+                mb: 1,
+              }}>Password</FormLabel>
+              <Field
+                as={TextField}
+                id="password"
+                name="password"
+                type="password"
+                variant="outlined"
+                size="small"
+                helperText={
+                  touched.password && errors.password ? errors.password : ''
+                }
+                error={touched.password && Boolean(errors.password)}
+                onBlur={handleBlur}
+              />
+            </FormControl>
 
-            variant="body2"
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: '.5rem', fontSize: '1rem' }}
+            >
+              Login <VpnKeyIcon sx={{ color: 'primary.gold' }} />
+            </Button>
+          </Form>
+        )}
+      </Formik>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{
+          textAlign: 'center',
+          my: 2,
+          position: 'relative',
+        }}
+      >
 
-            color="text.secondary"
+        OR
 
-            sx={{
+      </Typography>
+      <Button
+        variant="outlined"
+        color="primary"
+        fullWidth
+        onClick={handleGoogleLogin}
+        sx={{ mt: 2, py: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}
+      >
+        <FcGoogle size={24} />
+        <Typography variant="button" sx={{ fontSize: '1rem' }}>
+          Sign in with Google
+        </Typography>
+      </Button>
 
-              textAlign: 'center',
-
-              my: 2,
-
-              position: 'relative',
-
-            }}
-
-          >
-
-            OR
-
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            fullWidth
-            onClick={handleGoogleLogin}
-            sx={{ mt: 2, py: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}
-          >
-            <FcGoogle size={24} />
-            <Typography variant="button">
-              Sign in with Google
-            </Typography>
-          </Button>
-
-        </CardContent>
-      </StyledCard>
-    </SignInContainer>
+    </AuthWrapper>
   );
 };
 export default LoginForm;

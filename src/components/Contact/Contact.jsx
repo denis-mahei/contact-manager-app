@@ -9,8 +9,8 @@ import ConfirmDialog from '../ConfirmDialog/ConfirmDialog.jsx';
 import toast from 'react-hot-toast';
 import { FiUserX } from 'react-icons/fi';
 import { selectLoading } from '../../redux/contacts/selectors.js';
-import Loader from '../Loader/Loader.jsx';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { ContactSkeleton } from '../../ui/skeleton.jsx';
 
 
 const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, photo } ) => {
@@ -70,7 +70,7 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
 
   return (
     <>
-      {isLoading && <Loader />}
+      {isLoading && <ContactSkeleton />}
       <Card
         sx={{
           backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -157,12 +157,6 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
           }}
         >
           <IconButton
-            onClick={() => handleDelete(id)}
-            sx={{ color: '#676462' }}
-          >
-            <MdDelete />
-          </IconButton>
-          <IconButton
             onClick={handleToggleFavorite}
             sx={{ color: '#ba3939' }}
           >
@@ -176,6 +170,12 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
             title="Delete"
             description={`Are you sure you want to delete ${name}?`}
           />
+          <IconButton
+            onClick={() => handleDelete(id)}
+            sx={{ color: '#676462' }}
+          >
+            <MdDelete />
+          </IconButton>
         </Box>
       </Card>
     </>

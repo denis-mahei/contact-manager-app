@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import AppBar from '../AppBar/AppBar.jsx';
-import Footer from '../Footer/Footer.jsx';
+import Toolbar from '@mui/material/Toolbar';
 
 const Layout = () => {
   return (
@@ -16,10 +16,13 @@ const Layout = () => {
       }}
     >
       <AppBar />
+      <Toolbar />
+      <Toolbar />
       <Box
         component="main"
         sx={{
-          pt: 14,
+          display: 'flex',
+          flexDirection: 'column',
           flex: 1,
         }}
       >
