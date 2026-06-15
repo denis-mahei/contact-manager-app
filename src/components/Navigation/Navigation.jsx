@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
-import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 const Navigation = () => {

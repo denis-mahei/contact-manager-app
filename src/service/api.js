@@ -14,3 +14,9 @@ export const setAuthHeader = ( token ) => {
 export const clearAuthHeader = () => {
   delete contactsAPI.defaults.headers.common.Authorization;
 };
+
+export const requestResetEmail = ( email ) =>
+  contactsAPI.post('/auth/send-reset-email', { email });
+
+export const resetPassword = ( email ) =>
+  contactsAPI.post('/auth/reset-pwd', { email });

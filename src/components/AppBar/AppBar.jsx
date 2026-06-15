@@ -1,4 +1,3 @@
-//AppAppBar
 import * as React from 'react';
 import { alpha, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -11,19 +10,16 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-//AppAppBar
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 import UserMenu from '../UserMenu/UserMenu.jsx';
 import AuthNav from '../AuthNav/AuthNav.jsx';
 import Navigation from '../Navigation/Navigation.jsx';
 import { NavLink } from 'react-router-dom';
-import { Typography } from '@mui/material';
 import Favorite from '../Favorite/Favorite.jsx';
 import { selectFavouriteContacts } from '../../redux/contacts/selectors.js';
 
-
-const StyledToolbar = styled(Toolbar)(( { theme } ) => ({
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -35,7 +31,7 @@ const StyledToolbar = styled(Toolbar)(( { theme } ) => ({
   backgroundColor: theme.vars
     ? `rgba(${theme.vars.palette.background.defaultChannel} / 0.4)`
     : alpha(theme.palette.background.default, 0.4),
-  boxShadow: (theme.vars || theme).shadows[ 1 ],
+  boxShadow: (theme.vars || theme).shadows[1],
   padding: '8px 12px',
 }));
 
@@ -43,7 +39,8 @@ const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [open, setOpen] = React.useState(false);
   const favorites = useSelector(selectFavouriteContacts);
-  const toggleDrawer = ( newOpen ) => () => {
+
+  const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
@@ -59,21 +56,20 @@ const AppBar = () => {
       }}
     >
       <Container maxWidth="lg">
-        <StyledToolbar variant="dense" disableGutters
-                       sx={{
-                         background: 'rgba(255, 255, 255, 0.02)',
-                         backdropFilter: 'blur(5px)',
-                         WebkitBackdropFilter: 'blur(8px)',
-                         border: '2px solid rgba(255, 255, 255, 0.15)',
-                         boxShadow: '0 20px 70px rgba(0, 0, 0, 0.25)',
-                       }}
+        <StyledToolbar
+          variant="dense"
+          disableGutters
+          sx={{
+            background: 'rgba(255, 255, 255, 0.02)',
+            backdropFilter: 'blur(5px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            border: '2px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '-4px 2px 43px 2px rgba(0,0,0,0.31)',
+          }}
         >
           <Box
             sx={{
               flexGrow: 1,
-              display: 'flex',
-              alignItems: 'center',
-              px: 0,
             }}
           >
             <Navigation />
@@ -88,7 +84,7 @@ const AppBar = () => {
               alignItems: 'center',
             }}
           >
-            {isLoggedIn ? <UserMenu /> : <AuthNav />}
+            {isLoggedIn ? <UserMenu favorites={favorites} /> : <AuthNav />}
           </Box>
           <Box
             sx={{
@@ -100,13 +96,9 @@ const AppBar = () => {
               gap: 1,
             }}
           >
-            {isLoggedIn && (
-              <Typography variant="button" color="textPrimary">
-                <Favorite isfav={favorites} />
-              </Typography>
-            )}
+            {isLoggedIn && <Favorite isFav={favorites} />}
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: '24px' }} />
             </IconButton>
             <Drawer
               anchor="top"
@@ -118,10 +110,10 @@ const AppBar = () => {
                   backdropFilter: 'blur(4px)',
                   WebkitBackdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
+                  boxShadow:
+                    '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
                   borderRadius: '0px 0px 10px 10px',
                   top: 'var(--template-frame-height, 0px)',
-
                 },
               }}
             >

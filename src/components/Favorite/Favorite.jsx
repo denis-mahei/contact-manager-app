@@ -1,13 +1,12 @@
-import { Badge, Box, Typography } from '@mui/material';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Badge, Box, Typography } from '@mui/material';
 import { selectFavouriteContacts } from '../../redux/contacts/selectors.js';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 
 const Favorite = () => {
-  // const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpen = ( event ) => {
@@ -78,7 +77,7 @@ const Favorite = () => {
         <Box sx={{ p: 2 }}>
           {favorite.length > 0 ? (
             favorite.map(( item ) => (
-              <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Box key={item._id} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>{item.name}</Typography>
                 <Typography>{item.phoneNumber}</Typography>
               </Box>
@@ -86,7 +85,8 @@ const Favorite = () => {
           ) : (
             <Typography>No favourites</Typography>
           )}
-        </Box> </Popover>
+        </Box>
+      </Popover>
     </>
   );
 };

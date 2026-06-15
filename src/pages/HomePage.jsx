@@ -1,5 +1,4 @@
 import { Box, Container, Typography } from '@mui/material';
-import SocialButtons from '@/SocialButton/SocialButton.jsx';
 
 const HomePage = () => {
   return (
@@ -14,7 +13,13 @@ const HomePage = () => {
     >
       <Box
         sx={{
-          backgroundColor: 'background.paper',
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '3px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: 4,
+          boxShadow:
+            '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 2px 10px rgba(255, 255, 255, 0.15)',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -36,29 +41,20 @@ const HomePage = () => {
               transform: 'translateX(350%) translateY(50%) rotate(25deg)',
             },
           },
-          borderRadius: 4,
-          boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
           p: 3,
           maxWidth: 700,
           width: '100%',
-          transition: 'transform .2s ease, box-shadow .2s ease',
-          '&:hover': {
-
-            transform: 'translateY(-4px)',
-
-            boxShadow: '0 24px 60px rgba(0,0,0,0.12)',
-
-          },
           textAlign: 'center',
           display: 'flex',
+          alignContent: 'center',
           flexDirection: 'column',
-          gap: 3,
+          gap: { xs: 1, sm: 3 },
         }}
       >
-
         <Typography
           variant="h2"
           sx={{
+            fontSize: { xs: '30px', sm: '42px', md: '64px' },
             fontWeight: 900,
             background:
               'linear-gradient(160deg, #667eea 30%, #ffffff 50%, #764ba2 70%)',
@@ -78,13 +74,18 @@ const HomePage = () => {
         >
           Contact Book
         </Typography>
-        <Typography variant="h6" color="text.secondary">
+        <Typography
+          variant="h6"
+          color="text.secondary"
+          sx={{
+            fontSize: { xs: '14px', sm: '20px' },
+          }}
+        >
           Organize your connections. Quick. Simple. Secure.
         </Typography>
         <Typography variant="body2" color="text.disabled">
           Created by Denys Mahei
         </Typography>
-        <SocialButtons />
       </Box>
     </Container>
   );

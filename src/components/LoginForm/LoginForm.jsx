@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getGoogleAuthUrl, login } from '../../redux/auth/operations.js';
 import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import toast from 'react-hot-toast';
@@ -129,7 +129,10 @@ const LoginForm = () => {
           Sign in with Google
         </Typography>
       </Button>
-
+      <Typography variant="subtitle1" component={Link} to="/register"
+                  sx={{ mx: 'auto', mt: 5 }}>
+        Dont have an account? Sign Up
+      </Typography>
     </AuthWrapper>
   );
 };

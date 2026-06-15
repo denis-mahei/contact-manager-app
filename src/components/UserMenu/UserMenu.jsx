@@ -3,11 +3,14 @@ import { logOut } from '../../redux/auth/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
 import Button from '@mui/material/Button';
-import { IoIosLogOut } from 'react-icons/io';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Favorite from '../Favorite/Favorite.jsx';
 
-const UserMenu = () => {
+
+const UserMenu = ( { favorites } ) => {
   const dispatch = useDispatch();
   const { name } = useSelector(selectUser);
+
 
   return (
     <Box
@@ -21,6 +24,9 @@ const UserMenu = () => {
       <Typography variant="body1" color="inherit">
         Welcome, {name}!
       </Typography>
+
+      <Favorite isFav={favorites} />
+
       <Button
         onClick={() => dispatch(logOut())}
         color="inherit"
@@ -35,7 +41,7 @@ const UserMenu = () => {
           py: 0.4,
         }}
       >
-        <IoIosLogOut style={{ fontSize: '1.2rem' }} />
+        <LogoutIcon />
       </Button>
     </Box>
   );

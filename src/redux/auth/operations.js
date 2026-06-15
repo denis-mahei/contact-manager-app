@@ -5,9 +5,9 @@ export const register = createAsyncThunk(
   '/auth/register',
   async ( credential, thunkAPI ) => {
     try {
-      const res = await contactsAPI.post('/auth/register', credential);
-      setAuthHeader(res.data.data.accessToken);
-      return res.data;
+      const { data } = await contactsAPI.post('/auth/register', credential);
+      setAuthHeader(data.data.accessToken);
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -18,9 +18,9 @@ export const login = createAsyncThunk(
   'auth/login',
   async ( credential, thunkAPI ) => {
     try {
-      const res = await contactsAPI.post('/auth/login', credential);
-      setAuthHeader(res.data.data.accessToken);
-      return res.data;
+      const { data } = await contactsAPI.post('/auth/login', credential);
+      setAuthHeader(data.data.accessToken);
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -41,8 +41,8 @@ export const refreshUser = createAsyncThunk(
   'auth/me',
   async ( _, thunkAPI ) => {
     try {
-      const res = await contactsAPI.get('/auth/me');
-      return res.data;
+      const { data } = await contactsAPI.get('/auth/me');
+      return data;
     } catch (e) {
       clearAuthHeader();
       return thunkAPI.rejectWithValue(e.message);
@@ -60,8 +60,8 @@ export const getGoogleAuthUrl = createAsyncThunk(
   '/auth/get-oauth-url',
   async ( _, thunkAPI ) => {
     try {
-      const res = await contactsAPI.get('/auth/get-oauth-url');
-      return res.data.data.url;
+      const { data } = await contactsAPI.get('/auth/get-oauth-url');
+      return data.data.url;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -72,13 +72,37 @@ export const confirmGoogleOAuth = createAsyncThunk(
   'auth/confirm-oauth',
   async ( code, thunkAPI ) => {
     try {
-      const res = await contactsAPI.post('/auth/confirm-oauth', { code });
-      const token = res.data.data.accessToken;
+      const { data } = await contactsAPI.post('/auth/confirm-oauth', { code });
+      const token = data.data.accessToken;
       setAuthHeader(token);
 
       return {
         token,
       };
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  },
+);
+
+export const sendResetEmail = createAsyncThunk(
+  'auth/send-reset-email',
+  async ( email, thunkAPI ) => {
+    try {
+      const { data } = await contactsAPI.post('/auth/send-reset-email', { email });
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  },
+);
+
+export const resetPassword = createAsyncThunk(
+  'auth/reset-password',
+  async ( payload, thunkAPI ) => {
+    try {
+      const { data } = await contactsAPI.post('/auth/reset-pwd', payload);
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
