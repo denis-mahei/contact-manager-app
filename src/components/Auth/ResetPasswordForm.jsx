@@ -2,8 +2,9 @@ import { Box, Button, Container, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
-import { resetPassword } from '../../service/api.js';
 import { selectResetPasswordLoading } from '../../redux/auth/selectors.js';
+import { resetPassword } from '../../redux/auth/operations.js';
+import toast from 'react-hot-toast';
 
 const ResetPasswordForm = () => {
   const [password, setPassword] = useState('');
@@ -18,7 +19,7 @@ const ResetPasswordForm = () => {
     e.preventDefault();
     try {
       await dispatch(resetPassword({ token, password })).unwrap();
-
+      toast.success('Password reset successfully.');
       setTimeout(() => navigate('/login'), 1000);
     } catch (error) {
       console.log(error);

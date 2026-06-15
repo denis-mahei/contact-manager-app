@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')).render(
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
             <App />
-            <Toaster position="top-right" />
+            <Toaster position="top-center" />
           </ThemeProvider>
         </PersistGate>
       </Provider>
