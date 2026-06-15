@@ -11,7 +11,6 @@ const Layout = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         background:
           'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
         color: 'primary.main',
