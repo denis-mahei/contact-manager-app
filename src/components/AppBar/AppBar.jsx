@@ -155,7 +155,6 @@ const AppBar = () => {
                     <MenuItem
                       color="inherit"
                       variant="outlined"
-                      fullWidth
                       component={NavLink}
                       to="/register"
                       onClick={toggleDrawer(false)}
@@ -165,7 +164,6 @@ const AppBar = () => {
                     <MenuItem
                       color="inherit"
                       variant="outlined"
-                      fullWidth
                       component={NavLink}
                       to="/login"
                       onClick={toggleDrawer(false)}

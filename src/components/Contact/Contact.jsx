@@ -1,7 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FaPhoneAlt, FaUserTie } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
-import { Avatar, Box, Card, CardContent, IconButton, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import { deleteContact, editContact } from '../../redux/contacts/operations.js';
 import EditContactModal from '../EditContactModal/EditContactModal.jsx';
 import { useState } from 'react';
@@ -12,14 +19,21 @@ import { selectLoading } from '../../redux/contacts/selectors.js';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { ContactSkeleton } from '../../ui/skeleton.jsx';
 
-
-const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, photo } ) => {
+const Contact = ({
+  id,
+  name,
+  phoneNumber,
+  contactType,
+  isFavourite,
+  contact,
+  photo,
+}) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
   const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
-  const handleDelete = ( id ) => {
+  const handleDelete = (id) => {
     setContactToDelete(id);
     setConfirmOpen(true);
   };
@@ -47,25 +61,29 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
   };
 
   const handleToggleFavorite = async () => {
-    await dispatch(editContact({
-      id,
-      contact: {
-        ...contact,
-        isFavourite: !isFavourite,
-      },
-    }));
+    await dispatch(
+      editContact({
+        id,
+        contact: {
+          ...contact,
+          isFavourite: !isFavourite,
+        },
+      })
+    );
   };
 
-  const handleImageChange = async ( e ) => {
-    const file = e.target.files[ 0 ];
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
 
     const formData = new FormData();
     formData.append('photo', file);
 
-    await dispatch(editContact({
-      id,
-      contact: formData,
-    }));
+    await dispatch(
+      editContact({
+        id,
+        contact: formData,
+      })
+    );
   };
 
   return (
@@ -79,6 +97,7 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
           px: 2,
           py: 1,
           display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
           justifyContent: 'center',
           alignItems: 'center',
           color: 'primary.main',
@@ -92,13 +111,20 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
           },
         }}
       >
-
         <IconButton component="label">
-          <Avatar src={photo} sx={{
-            width: 80,
-            height: 80,
-          }} />
-          <input hidden type="file" accept="image/*" onChange={handleImageChange} />
+          <Avatar
+            src={photo}
+            sx={{
+              width: 80,
+              height: 80,
+            }}
+          />
+          <input
+            hidden
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
         </IconButton>
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography
@@ -146,23 +172,24 @@ const Contact = ( { id, name, phoneNumber, contactType, isFavourite, contact, ph
             <FaPhoneAlt color="#dead59" />
             {contactType}
           </Typography>
-
         </CardContent>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: { xs: 'row', md: 'column' },
             alignItems: 'center',
             gap: 1,
           }}
         >
-          <IconButton
-            onClick={handleToggleFavorite}
-            sx={{ color: '#ba3939' }}
-          >
+          <IconButton onClick={handleToggleFavorite} sx={{ color: '#ba3939' }}>
             {isFavourite ? <GoHeartFill /> : <GoHeart />}
           </IconButton>
-          <EditContactModal id={id} name={name} number={phoneNumber} contactType={contactType} />
+          <EditContactModal
+            id={id}
+            name={name}
+            number={phoneNumber}
+            contactType={contactType}
+          />
           <ConfirmDialog
             open={confirmOpen}
             onConfirm={handleConfirmDelete}

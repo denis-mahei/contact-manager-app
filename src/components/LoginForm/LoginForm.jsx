@@ -1,19 +1,27 @@
 import { Field, Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getGoogleAuthUrl, login } from '../../redux/auth/operations.js';
-import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  TextField,
+  Typography,
+} from '@mui/material';
 import toast from 'react-hot-toast';
 import { loginValidationSchema } from '../../utils/validation.js';
 import { FcGoogle } from 'react-icons/fc';
 import AuthWrapper from '../Auth/AuthWrapper.jsx';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { selectGoogleLoading } from '../../redux/auth/selectors.js';
 
-const LoginForm = () => {
+const LoginForm = ({ isLoading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isGoogleLoading = useSelector(selectGoogleLoading);
 
-  const handleSubmit = async ( values, action ) => {
+  const handleSubmit = async (values, action) => {
     try {
       const result = await dispatch(login(values));
       if (login.fulfilled.match(result)) {
@@ -38,10 +46,14 @@ const LoginForm = () => {
 
   return (
     <AuthWrapper>
-
-      <Typography sx={{
-        color: 'primary.main',
-      }} variant="h5" component="h1" gutterBottom>
+      <Typography
+        sx={{
+          color: 'primary.main',
+        }}
+        variant="h5"
+        component="h1"
+        gutterBottom
+      >
         Sign In
       </Typography>
       <Formik
@@ -52,12 +64,17 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
         validationSchema={loginValidationSchema}
       >
-        {( { touched, errors, handleBlur } ) => (
+        {({ touched, errors, handleBlur }) => (
           <Form>
             <FormControl fullWidth margin="normal">
-              <FormLabel htmlFor="email" sx={{
-                mb: 1,
-              }}>Email</FormLabel>
+              <FormLabel
+                htmlFor="email"
+                sx={{
+                  mb: 1,
+                }}
+              >
+                Email
+              </FormLabel>
               <Field
                 as={TextField}
                 id="email"
@@ -65,18 +82,21 @@ const LoginForm = () => {
                 type="email"
                 variant="outlined"
                 size="small"
-                helperText={
-                  touched.email && errors.email ? errors.email : ''
-                }
+                helperText={touched.email && errors.email ? errors.email : ''}
                 error={touched.email && Boolean(errors.email)}
                 onBlur={handleBlur}
               />
             </FormControl>
 
             <FormControl fullWidth margin="normal">
-              <FormLabel htmlFor="password" sx={{
-                mb: 1,
-              }}>Password</FormLabel>
+              <FormLabel
+                htmlFor="password"
+                sx={{
+                  mb: 1,
+                }}
+              >
+                Password
+              </FormLabel>
               <Field
                 as={TextField}
                 id="password"
@@ -95,11 +115,25 @@ const LoginForm = () => {
             <Button
               type="submit"
               variant="contained"
-              color="primary"
               fullWidth
-              sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: '.5rem', fontSize: '1rem' }}
+              loading={isLoading}
+              loadingPosition="end"
+              startIcon={<VpnKeyIcon sx={{ color: 'primary.gold' }} />}
+              sx={{
+                mt: 2,
+                fontSize: '1rem',
+              }}
             >
-              Login <VpnKeyIcon sx={{ color: 'primary.gold' }} />
+              Sign in
+            </Button>
+
+            <Button
+              component={Link}
+              to="/forgot-password"
+              variant="text"
+              sx={{ mt: 1, textTransform: 'capitalize' }}
+            >
+              Forgot password?
             </Button>
           </Form>
         )}
@@ -113,26 +147,45 @@ const LoginForm = () => {
           position: 'relative',
         }}
       >
-
         OR
-
       </Typography>
       <Button
         variant="outlined"
         color="primary"
         fullWidth
+        disabled={isGoogleLoading}
+        loadingPosition="end"
+        loading={isGoogleLoading}
+        startIcon={<FcGoogle size={24} />}
         onClick={handleGoogleLogin}
-        sx={{ mt: 2, py: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}
+        sx={{
+          mt: 2,
+          py: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 1,
+        }}
       >
-        <FcGoogle size={24} />
         <Typography variant="button" sx={{ fontSize: '1rem' }}>
           Sign in with Google
         </Typography>
       </Button>
-      <Typography variant="subtitle1" component={Link} to="/register"
-                  sx={{ mx: 'auto', mt: 5 }}>
+      <Button
+        variant="text"
+        component={Link}
+        to="/register"
+        sx={{
+          mt: 2,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: 'primary.main',
+          textTransform: 'none',
+        }}
+      >
         Dont have an account? Sign Up
-      </Typography>
+      </Button>
     </AuthWrapper>
   );
 };

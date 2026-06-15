@@ -7,7 +7,7 @@ const contactsAPI = axios.create({
 
 export default contactsAPI;
 
-export const setAuthHeader = ( token ) => {
+export const setAuthHeader = (token) => {
   contactsAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -15,8 +15,8 @@ export const clearAuthHeader = () => {
   delete contactsAPI.defaults.headers.common.Authorization;
 };
 
-export const requestResetEmail = ( email ) =>
+export const requestResetEmail = (email) =>
   contactsAPI.post('/auth/send-reset-email', { email });
 
-export const resetPassword = ( email ) =>
-  contactsAPI.post('/auth/reset-pwd', { email });
+export const resetPassword = ({ token, password }) =>
+  contactsAPI.post('/auth/reset-pwd', { token, password });

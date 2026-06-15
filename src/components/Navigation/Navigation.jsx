@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
+import HomeFilledIcon from '@mui/icons-material/HomeFilled';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -31,7 +33,7 @@ const Navigation = () => {
           py: 0.5,
         }}
       >
-        Home
+        <HomeFilledIcon />
       </Button>
 
       {isLoggedIn && (
@@ -51,7 +53,7 @@ const Navigation = () => {
             py: 0.5,
           }}
         >
-          Contacts
+          <ContactPhoneIcon />
         </Button>
       )}
     </Box>

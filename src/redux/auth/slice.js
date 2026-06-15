@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { confirmGoogleOAuth, login, logOut, refreshUser, register } from './operations.js';
+import {
+  confirmGoogleOAuth,
+  login,
+  logOut,
+  refreshUser,
+  register,
+  resetPassword,
+  sendResetEmail,
+} from './operations.js';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -11,25 +19,44 @@ const authSlice = createSlice({
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
+
+    isLoading: false,
+    isGoogleLoading: false,
+    isResetEmailLoading: false,
+    isResetPasswordLoading: false,
   },
 
   reducers: {
-    setToken: ( state, action ) => {
+    setToken: (state, action) => {
       state.token = action.payload;
     },
   },
 
-  extraReducers: ( builder ) => {
+  extraReducers: (builder) => {
     builder
-      .addCase(register.fulfilled, ( state, action ) => {
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, action) => {
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
+        state.isLoading = false;
       })
-      .addCase(login.fulfilled, ( state, action ) => {
+      .addCase(register.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
+        state.isLoading = false;
       })
-      .addCase(logOut.fulfilled, ( state ) => {
+      .addCase(login.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(logOut.fulfilled, (state) => {
         state.user = {
           name: null,
           email: null,
@@ -37,23 +64,48 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(refreshUser.pending, ( state ) => {
+      .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
-      .addCase(confirmGoogleOAuth.fulfilled, ( state, action ) => {
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
-      })
-      .addCase(refreshUser.fulfilled, ( state, action ) => {
+      .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload.data;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, ( state ) => {
+      .addCase(refreshUser.rejected, (state) => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
+      })
+      .addCase(confirmGoogleOAuth.pending, (state) => {
+        state.isGoogleLoading = true;
+      })
+      .addCase(confirmGoogleOAuth.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+        state.isGoogleLoading = false;
+      })
+      .addCase(confirmGoogleOAuth.rejected, (state) => {
+        state.isGoogleLoading = false;
+      })
+      .addCase(sendResetEmail.pending, (state) => {
+        state.isResetEmailLoading = true;
+      })
+      .addCase(sendResetEmail.fulfilled, (state) => {
+        state.isResetEmailLoading = false;
+      })
+      .addCase(sendResetEmail.rejected, (state) => {
+        state.isResetEmailLoading = false;
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.isResetPasswordLoading = true;
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.isResetPasswordLoading = false;
+      })
+      .addCase(resetPassword.rejected, (state) => {
+        state.isResetPasswordLoading = false;
       });
   },
 });

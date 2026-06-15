@@ -1,4 +1,10 @@
-import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,12 +13,11 @@ import toast from 'react-hot-toast';
 import { registerValidationSchema } from '../../utils/validation.js';
 import AuthWrapper from '../Auth/AuthWrapper.jsx';
 
-
-const RegistrationForm = () => {
+const RegistrationForm = ({ isLoading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async ( values, action ) => {
+  const handleSubmit = async (values, action) => {
     try {
       await dispatch(register(values));
       toast.success('Successful!');
@@ -22,7 +27,6 @@ const RegistrationForm = () => {
       toast.error('Email already exists or is invalid');
     }
   };
-
 
   return (
     <AuthWrapper>
@@ -38,12 +42,17 @@ const RegistrationForm = () => {
         validationSchema={registerValidationSchema}
         onSubmit={handleSubmit}
       >
-        {( { touched, errors, handleBlur } ) => (
+        {({ touched, errors, handleBlur }) => (
           <Form>
             <FormControl fullWidth sx={{ mb: 1 }}>
-              <FormLabel htmlFor="name" sx={{
-                mb: 1,
-              }}>Name</FormLabel>
+              <FormLabel
+                htmlFor="name"
+                sx={{
+                  mb: 1,
+                }}
+              >
+                Name
+              </FormLabel>
               <Field
                 as={TextField}
                 id="name"
@@ -56,9 +65,14 @@ const RegistrationForm = () => {
               />
             </FormControl>
             <FormControl fullWidth margin="normal">
-              <FormLabel htmlFor="email" sx={{
-                mb: 1,
-              }}>Email</FormLabel>
+              <FormLabel
+                htmlFor="email"
+                sx={{
+                  mb: 1,
+                }}
+              >
+                Email
+              </FormLabel>
               <Field
                 as={TextField}
                 id="email"
@@ -72,9 +86,14 @@ const RegistrationForm = () => {
               />
             </FormControl>
             <FormControl fullWidth margin="normal">
-              <FormLabel htmlFor="password" sx={{
-                mb: 1,
-              }}>Password</FormLabel>
+              <FormLabel
+                htmlFor="password"
+                sx={{
+                  mb: 1,
+                }}
+              >
+                Password
+              </FormLabel>
               <Field
                 as={TextField}
                 id="password"
@@ -89,7 +108,10 @@ const RegistrationForm = () => {
             </FormControl>
             <Button
               type="submit"
+              disabled={isLoading}
               variant="contained"
+              loading={isLoading}
+              loadingPosition="end"
               color="primary"
               fullWidth
               sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: '1rem' }}
@@ -100,11 +122,8 @@ const RegistrationForm = () => {
         )}
       </Formik>
       <Typography
-
         variant="body2"
-
         color="text.secondary"
-
         sx={{
           textAlign: 'center',
           my: 2,
@@ -122,7 +141,6 @@ const RegistrationForm = () => {
       >
         Already have an account? Sign in
       </Button>
-
     </AuthWrapper>
   );
 };
