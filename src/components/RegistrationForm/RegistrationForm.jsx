@@ -1,7 +1,8 @@
 import {
+  Box,
   Button,
   FormControl,
-  FormLabel,
+  InputAdornment,
   TextField,
   Typography,
 } from '@mui/material';
@@ -12,10 +13,27 @@ import { register } from '../../redux/auth/operations.js';
 import toast from 'react-hot-toast';
 import { registerValidationSchema } from '../../utils/validation.js';
 import AuthWrapper from '../Auth/AuthWrapper.jsx';
+import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+
+import PasswordIcon from '@mui/icons-material/Password';
 
 const RegistrationForm = ({ isLoading }) => {
+  const [showPwd, setShowPwd] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleShowPwd = () => setShowPwd((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (event) => {
+    event.preventDefault();
+  };
 
   const handleSubmit = async (values, action) => {
     try {
@@ -30,7 +48,11 @@ const RegistrationForm = ({ isLoading }) => {
 
   return (
     <AuthWrapper>
-      <Typography variant="h5" gutterBottom>
+      <Typography
+        variant="h5"
+        gutterBottom
+        sx={{ mb: 3, color: 'primary.main' }}
+      >
         Sign Up
       </Typography>
       <Formik
@@ -44,67 +66,107 @@ const RegistrationForm = ({ isLoading }) => {
       >
         {({ touched, errors, handleBlur }) => (
           <Form>
-            <FormControl fullWidth sx={{ mb: 1 }}>
-              <FormLabel
-                htmlFor="name"
-                sx={{
-                  mb: 1,
-                }}
-              >
-                Name
-              </FormLabel>
-              <Field
-                as={TextField}
-                id="name"
-                name="name"
-                variant="outlined"
-                size="small"
-                helperText={<ErrorMessage name="name" />}
-                error={touched.name && Boolean(errors.name)}
-                onBlur={handleBlur}
-              />
+            <FormControl
+              fullWidth
+              sx={{
+                mb: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <AccountCircle
+                  sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+                />
+                <Field
+                  as={TextField}
+                  sx={{
+                    width: '100%',
+                    '& .MuiInput-underline::after': {
+                      borderColor: '#fff',
+                    },
+                  }}
+                  id="name"
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onBlur={handleBlur}
+                  helperText={<ErrorMessage name="name" />}
+                  variant="standard"
+                  error={touched.name && Boolean(errors.name)}
+                />
+              </Box>
             </FormControl>
-            <FormControl fullWidth margin="normal">
-              <FormLabel
-                htmlFor="email"
-                sx={{
-                  mb: 1,
-                }}
-              >
-                Email
-              </FormLabel>
-              <Field
-                as={TextField}
-                id="email"
-                name="email"
-                type="email"
-                variant="outlined"
-                size="small"
-                helperText={<ErrorMessage name="email" />}
-                error={touched.email && Boolean(errors.email)}
-                onBlur={handleBlur}
-              />
+            <FormControl
+              fullWidth
+              sx={{
+                mb: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <AlternateEmailIcon
+                  sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+                />
+                <Field
+                  as={TextField}
+                  sx={{
+                    width: '100%',
+                    '& .MuiInput-underline::after': {
+                      borderColor: '#fff',
+                    },
+                  }}
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  onBlur={handleBlur}
+                  helperText={<ErrorMessage name="email" />}
+                  variant="standard"
+                  error={touched.email && Boolean(errors.email)}
+                />
+              </Box>
             </FormControl>
-            <FormControl fullWidth margin="normal">
-              <FormLabel
-                htmlFor="password"
-                sx={{
-                  mb: 1,
-                }}
-              >
-                Password
-              </FormLabel>
-              <Field
-                as={TextField}
-                id="password"
-                name="password"
-                type="password"
-                variant="outlined"
-                size="small"
-                helperText={<ErrorMessage name="password" />}
-                error={touched.password && Boolean(errors.password)}
-                onBlur={handleBlur}
-              />
+
+            <FormControl sx={{ mb: 1 }} fullWidth>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <PasswordIcon sx={{ color: 'action.active', mr: 1 }} />
+                <Field
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label={
+                              showPwd
+                                ? 'hide the password'
+                                : 'display the password'
+                            }
+                            onClick={handleShowPwd}
+                            onMouseDown={handleMouseDownPassword}
+                            onMouseUp={handleMouseUpPassword}
+                            edge="start"
+                          >
+                            {showPwd ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
+                  }}
+                  as={TextField}
+                  sx={{
+                    width: '100%',
+                    '& .MuiInput-underline::after': {
+                      borderColor: '#fff',
+                    },
+                  }}
+                  id="password"
+                  name="password"
+                  type={showPwd ? 'text' : 'password'}
+                  label="Password"
+                  onBlur={handleBlur}
+                  helperText={<ErrorMessage name="password" />}
+                  variant="standard"
+                  error={touched.password && Boolean(errors.password)}
+                />
+              </Box>
             </FormControl>
             <Button
               type="submit"
@@ -135,11 +197,12 @@ const RegistrationForm = ({ isLoading }) => {
       <Button
         variant="outlined"
         color="primary"
+        loading={isLoading}
         fullWidth
         component={Link}
         to="/login"
       >
-        Already have an account? Sign in
+        Already have an account?
       </Button>
     </AuthWrapper>
   );

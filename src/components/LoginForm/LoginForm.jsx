@@ -1,11 +1,12 @@
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getGoogleAuthUrl, login } from '../../redux/auth/operations.js';
 import {
+  Box,
   Button,
   FormControl,
-  FormLabel,
+  InputAdornment,
   TextField,
   Typography,
 } from '@mui/material';
@@ -15,8 +16,14 @@ import { FcGoogle } from 'react-icons/fc';
 import AuthWrapper from '../Auth/AuthWrapper.jsx';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { selectGoogleLoading } from '../../redux/auth/selectors.js';
+import { useState } from 'react';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import PasswordIcon from '@mui/icons-material/Password';
+import IconButton from '@mui/material/IconButton';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginForm = ({ isLoading }) => {
+  const [showPwd, setShowPwd] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isGoogleLoading = useSelector(selectGoogleLoading);
@@ -35,7 +42,15 @@ const LoginForm = ({ isLoading }) => {
       toast.error(e.message);
     }
   };
+  const handleShowPwd = () => setShowPwd((show) => !show);
 
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (event) => {
+    event.preventDefault();
+  };
   const handleGoogleLogin = async () => {
     const res = await dispatch(getGoogleAuthUrl());
 
@@ -49,6 +64,7 @@ const LoginForm = ({ isLoading }) => {
       <Typography
         sx={{
           color: 'primary.main',
+          mb: 3,
         }}
         variant="h5"
         component="h1"
@@ -66,50 +82,78 @@ const LoginForm = ({ isLoading }) => {
       >
         {({ touched, errors, handleBlur }) => (
           <Form>
-            <FormControl fullWidth margin="normal">
-              <FormLabel
-                htmlFor="email"
-                sx={{
-                  mb: 1,
-                }}
-              >
-                Email
-              </FormLabel>
-              <Field
-                as={TextField}
-                id="email"
-                name="email"
-                type="email"
-                variant="outlined"
-                size="small"
-                helperText={touched.email && errors.email ? errors.email : ''}
-                error={touched.email && Boolean(errors.email)}
-                onBlur={handleBlur}
-              />
+            <FormControl
+              fullWidth
+              sx={{
+                mb: 1,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <AlternateEmailIcon
+                  sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+                />
+                <Field
+                  as={TextField}
+                  sx={{
+                    width: '100%',
+                    '& .MuiInput-underline::after': {
+                      borderColor: '#fff',
+                    },
+                  }}
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  onBlur={handleBlur}
+                  helperText={<ErrorMessage name="email" />}
+                  variant="standard"
+                  error={touched.email && Boolean(errors.email)}
+                />
+              </Box>
             </FormControl>
 
-            <FormControl fullWidth margin="normal">
-              <FormLabel
-                htmlFor="password"
-                sx={{
-                  mb: 1,
-                }}
-              >
-                Password
-              </FormLabel>
-              <Field
-                as={TextField}
-                id="password"
-                name="password"
-                type="password"
-                variant="outlined"
-                size="small"
-                helperText={
-                  touched.password && errors.password ? errors.password : ''
-                }
-                error={touched.password && Boolean(errors.password)}
-                onBlur={handleBlur}
-              />
+            <FormControl sx={{ mb: 1 }} fullWidth>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <PasswordIcon sx={{ color: 'action.active', mr: 1 }} />
+                <Field
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label={
+                              showPwd
+                                ? 'hide the password'
+                                : 'display the password'
+                            }
+                            onClick={handleShowPwd}
+                            onMouseDown={handleMouseDownPassword}
+                            onMouseUp={handleMouseUpPassword}
+                            edge="start"
+                          >
+                            {showPwd ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
+                  }}
+                  as={TextField}
+                  sx={{
+                    width: '100%',
+                    '& .MuiInput-underline::after': {
+                      borderColor: '#fff',
+                    },
+                  }}
+                  id="password"
+                  name="password"
+                  type={showPwd ? 'text' : 'password'}
+                  label="Password"
+                  onBlur={handleBlur}
+                  helperText={<ErrorMessage name="password" />}
+                  variant="standard"
+                  error={touched.password && Boolean(errors.password)}
+                />
+              </Box>
             </FormControl>
 
             <Button
@@ -150,12 +194,12 @@ const LoginForm = ({ isLoading }) => {
         OR
       </Typography>
       <Button
+        type="submit"
         variant="outlined"
         color="primary"
         fullWidth
-        disabled={isGoogleLoading}
         loadingPosition="end"
-        loading={isGoogleLoading}
+        loading={isLoading}
         startIcon={<FcGoogle size={24} />}
         onClick={handleGoogleLogin}
         sx={{

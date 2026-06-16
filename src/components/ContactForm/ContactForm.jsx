@@ -7,17 +7,17 @@ import { Box, Button, TextField } from '@mui/material';
 import toast from 'react-hot-toast';
 import MenuItem from '@mui/material/MenuItem';
 
-const ContactForm = ( { onClose } ) => {
+const ContactForm = ({ onClose }) => {
   const dispatch = useDispatch();
 
-  const handleSubmit = ( values, { resetForm } ) => {
+  const handleSubmit = (values, { resetForm }) => {
     dispatch(
       addContact({
         name: values.name,
         phoneNumber: values.phoneNumber,
         contactType: values.contactType,
         isFavourite: values.isFavourite,
-      }),
+      })
     );
 
     toast(`${values.name} was added to your contacts!`, {
@@ -56,15 +56,21 @@ const ContactForm = ( { onClose } ) => {
           }}
         >
           <Field name="name">
-            {( { field, meta } ) => (
+            {({ field, meta }) => (
               <TextField
                 {...field}
                 label="Name"
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}
                 helperText={meta.touched && meta.error}
-                variant="filled"
+                variant="standard"
                 sx={{
+                  input: {
+                    color: 'white',
+                  },
+                  '& .MuiInput-underline::after': {
+                    borderColor: '#fff',
+                  },
                   '& .MuiSelect-select': {
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
                     color: '#fff',
@@ -99,23 +105,26 @@ const ContactForm = ( { onClose } ) => {
           </Field>
 
           <Field name="phoneNumber">
-            {( { field, meta } ) => (
+            {({ field, meta }) => (
               <TextField
                 {...field}
                 label="Number"
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}
                 helperText={meta.touched && meta.error}
-                variant="filled"
+                variant="standard"
                 sx={{
                   input: {
-                    backgroundColor: 'rgba(255, 255, 255, 0.06)',
                     color: '#fff',
+                  },
+                  '& .MuiInput-underline::after': {
+                    borderColor: '#fff',
                   },
                   label: {
                     color: '#fff',
                     '&.Mui-focused': {
                       color: '#fff',
+                      borderColor: 'rgb(255 255 255 / 0.79)',
                     },
                   },
                   '& .MuiFilledInput-root': {
@@ -133,13 +142,14 @@ const ContactForm = ( { onClose } ) => {
                   '& .MuiFilledInput-root.Mui-focused': {
                     boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
                     backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
                   },
                 }}
               />
             )}
           </Field>
           <Field name="contactType">
-            {( { field, meta } ) => (
+            {({ field, meta }) => (
               <TextField
                 {...field}
                 select
@@ -147,7 +157,7 @@ const ContactForm = ( { onClose } ) => {
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}
                 helperText={meta.touched && meta.error}
-                variant="filled"
+                variant="standard"
                 sx={{
                   input: {
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -159,10 +169,13 @@ const ContactForm = ( { onClose } ) => {
                       color: '#fff',
                     },
                   },
+                  '& .MuiInput-underline::after': {
+                    borderColor: '#fff',
+                  },
+                  '& .MuiSelect-select': {
+                    color: '#fff',
+                  },
                   '& .MuiFilledInput-root': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.06)',
-                    borderRadius: 1,
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#fff',
                   },
                 }}

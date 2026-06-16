@@ -10,16 +10,14 @@ const Wrapper = styled(Box)(() => ({
 }));
 
 const AuthCard = styled(Card)(() => ({
-  maxWidth: 420,
+  maxWidth: 400,
   width: '100%',
-  borderRadius: 16,
-  background:
-    'linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.03) 45%, transparent 70%)',
-  backdropFilter: 'blur(4px)',
-  WebkitBackdropFilter: 'blur(20px)',
-  border: '4px solid rgba(255, 255, 255, 0.4)',
+  borderRadius: 12,
+  background: 'rgb(158 158 158 / 0.4)',
+  backdropFilter: 'blur(1px)',
+  border: '3px solid rgba(255, 255, 255, 0.5)',
   boxShadow:
-    '0 20px 60px rgba(0,0,0,0.15), inset 0 20px 60px rgba(255, 255, 255, 0.3)',
+    '0 20px 60px rgba(0,0,0,0.3), inset 1px 70px 50px rgba(255, 255, 255, 0.6)',
 }));
 
 const AuthWrapper = ({ children }) => {
@@ -28,7 +26,7 @@ const AuthWrapper = ({ children }) => {
       <AuthCard>
         <CardContent
           sx={{
-            p: 3,
+            p: 1.5,
           }}
         >
           {children}

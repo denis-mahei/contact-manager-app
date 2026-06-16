@@ -13,13 +13,12 @@ const HomePage = () => {
     >
       <Box
         sx={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          border: '3px solid rgba(255, 255, 255, 0.2)',
+          background: 'rgba(255,255,255,0.2)',
+          backdropFilter: 'blur(2px)',
+          border: '4px solid rgba(255,255,255,0.5)',
           borderRadius: 4,
           boxShadow:
-            '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 2px 10px rgba(255, 255, 255, 0.15)',
+            '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 32px 20px rgba(255, 255, 255, 0.5)',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {

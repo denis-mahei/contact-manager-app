@@ -7,11 +7,12 @@ const theme = createTheme({
       main: '#626881',
       bgColor: 'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
       gold: '#ffc400',
+      iconColor: '#977027',
       white: '#ffffff',
     },
     secondary: {
       main: '#ff1f1f',
-    }
+    },
   },
   typography: {
     fontFamily: 'Roboto, Arial, sans-serif',

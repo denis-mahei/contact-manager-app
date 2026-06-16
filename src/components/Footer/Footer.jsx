@@ -15,9 +15,9 @@ const Footer = () => {
         gap: 1.5,
         borderTop: '3px solid rgba(255,255,255,0.9)',
         borderRadius: '8px 0 0 0',
-        backgroundColor: 'rgba(255 255 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        boxShadow: '6px 14px 40px -14px rgba(255,255,255,0.9) inset',
+        backgroundColor: 'rgb(239 238 238 / 0.09)',
+        backdropFilter: 'blur(1px)',
+        boxShadow: '6px 14px 40px -14px rgba(255,255,255,0.6) inset',
       }}
     >
       <Typography
