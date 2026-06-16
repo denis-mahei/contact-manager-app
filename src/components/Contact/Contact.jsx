@@ -97,7 +97,7 @@ const Contact = ({
           px: 2,
           py: 1,
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: { xs: 'column', sm: 'row', md: 'row' },
           justifyContent: 'center',
           alignItems: 'center',
           color: 'primary.main',

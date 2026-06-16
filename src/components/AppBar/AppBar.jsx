@@ -18,6 +18,7 @@ import Navigation from '../Navigation/Navigation.jsx';
 import { NavLink } from 'react-router-dom';
 import Favorite from '../Favorite/Favorite.jsx';
 import { selectFavouriteContacts } from '../../redux/contacts/selectors.js';
+import { useState } from 'react';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -37,7 +38,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const favorites = useSelector(selectFavouriteContacts);
 
   const toggleDrawer = (newOpen) => () => {

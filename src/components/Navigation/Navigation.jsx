@@ -19,17 +19,14 @@ const Navigation = () => {
       <Button
         component={NavLink}
         to="/"
-        color="inherit"
         sx={{
           '&.active': {
             backgroundColor: 'primary.main',
             color: 'white',
           },
-          textTransform: 'uppercase',
-          borderRadius: 1,
-          border: '1px solid rgba(255,255,255,0.6)',
+          borderRadius: 2,
           color: 'primary.main',
-          px: 2,
+          px: 1,
           py: 0.5,
         }}
       >
@@ -40,17 +37,13 @@ const Navigation = () => {
         <Button
           component={NavLink}
           to="/contacts"
-          color="inherit"
           sx={{
             '&.active': {
               backgroundColor: 'primary.main',
               color: 'white',
             },
-            textTransform: 'uppercase',
-            borderRadius: 1,
-            border: '1px solid rgba(255,255,255,0.6)',
-            px: 2,
-            py: 0.5,
+            borderRadius: 2,
+            p: 0.5,
           }}
         >
           <ContactPhoneIcon />

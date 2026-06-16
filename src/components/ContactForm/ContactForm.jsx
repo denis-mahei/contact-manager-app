@@ -60,6 +60,7 @@ const ContactForm = ({ onClose }) => {
               <TextField
                 {...field}
                 label="Name"
+                required
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}
                 helperText={meta.touched && meta.error}
@@ -108,6 +109,7 @@ const ContactForm = ({ onClose }) => {
             {({ field, meta }) => (
               <TextField
                 {...field}
+                required
                 label="Number"
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}
@@ -153,6 +155,26 @@ const ContactForm = ({ onClose }) => {
               <TextField
                 {...field}
                 select
+                SelectProps={{
+                  MenuProps: {
+                    PaperProps: {
+                      sx: {
+                        backgroundColor: 'rgb(255 255 255 / 0.08)',
+                        borderRadius: 2,
+                        backdropFilter: 'blur(2px)',
+                        color: '#fff',
+                        '& .MuiSelect-select:hover': {
+                          backgroundColor: 'rgb(255 255 255 / 0.25)',
+                        },
+                        '& .MuiButtonBase-root:hover': {
+                          backgroundColor: 'rgb(255 255 255 / 0.09)',
+                          backdropFilter: 'blur(4px)',
+                          borderRadius: 3,
+                        },
+                      },
+                    },
+                  },
+                }}
                 label="Contact Type"
                 fullWidth
                 error={meta.touched && Boolean(meta.error)}

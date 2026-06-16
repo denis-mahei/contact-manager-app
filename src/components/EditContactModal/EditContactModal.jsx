@@ -16,7 +16,7 @@ import { editContact } from '../../redux/contacts/operations.js';
 import toast from 'react-hot-toast';
 import MenuItem from '@mui/material/MenuItem';
 
-const BootstrapDialog = styled(Dialog)(( { theme } ) => ({
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
   },
@@ -29,12 +29,13 @@ const BootstrapDialog = styled(Dialog)(( { theme } ) => ({
     WebkitBackdropFilter: 'blur(20px)',
     border: '2px solid rgba(255, 255, 255, 0.2)',
     borderRadius: 15,
-    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 10px rgba(255, 255, 255, 0.15)',
+    boxShadow:
+      '0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 10px rgba(255, 255, 255, 0.15)',
     color: '#fff',
   },
 }));
 
-const EditContactModal = ( { id, name, number, contactType } ) => {
+const EditContactModal = ({ id, name, number, contactType }) => {
   const [contactName, setContactName] = useState(name);
   const [contactNumber, setContactNumber] = useState(number);
   const [type, setType] = useState(contactType);
@@ -51,7 +52,7 @@ const EditContactModal = ( { id, name, number, contactType } ) => {
             phoneNumber: contactNumber,
             contactType: type,
           },
-        }),
+        })
       );
       toast.success('Contact updated!');
       handleClose();
@@ -97,11 +98,11 @@ const EditContactModal = ( { id, name, number, contactType } ) => {
         <IconButton
           aria-label="close"
           onClick={handleClose}
-          sx={( theme ) => ({
+          sx={() => ({
             position: 'absolute',
             right: 8,
             top: 8,
-            color: theme.palette.grey[ 500 ],
+            color: 'inherit',
           })}
         >
           <CloseIcon />
@@ -123,7 +124,7 @@ const EditContactModal = ( { id, name, number, contactType } ) => {
               label="Name"
               variant="outlined"
               value={contactName}
-              onChange={( event ) => setContactName(event.target.value)}
+              onChange={(event) => setContactName(event.target.value)}
               sx={{
                 input: {
                   backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -157,7 +158,7 @@ const EditContactModal = ( { id, name, number, contactType } ) => {
               label="Number"
               variant="outlined"
               value={contactNumber}
-              onChange={( event ) => setContactNumber(event.target.value)}
+              onChange={(event) => setContactNumber(event.target.value)}
               sx={{
                 input: {
                   backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -192,7 +193,7 @@ const EditContactModal = ( { id, name, number, contactType } ) => {
               value={type}
               label="Contact Type"
               select
-              onChange={( event ) => setType(event.target.value)}
+              onChange={(event) => setType(event.target.value)}
               variant="outlined"
               sx={{
                 input: {
@@ -232,8 +233,6 @@ const EditContactModal = ( { id, name, number, contactType } ) => {
               <MenuItem value="home">Home</MenuItem>
               <MenuItem value="personal">Personal</MenuItem>
             </TextField>
-
-
           </Box>
         </DialogContent>
         <DialogActions>

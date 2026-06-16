@@ -52,14 +52,14 @@ const ForgotPwdForm = () => {
           justifyContent: 'center',
           alignItems: 'center',
           gap: '1rem',
-          maxWidth: '40%',
+          maxWidth: '80%',
           border: '2px solid #ffffff',
           borderRadius: 3,
           mx: 'auto',
           p: 2,
           boxShadow: '1px 12px 20px rgba(0, 0, 0, 0.4)',
           backdropFilter: 'blur(1px)',
-          background: 'rgba(255,255 ,255 , .5)',
+          background: 'rgba(255,255 ,255 , .4)',
         }}
       >
         <TextField

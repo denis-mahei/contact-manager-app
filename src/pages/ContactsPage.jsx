@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchContacts } from '../redux/contacts/operations.js';
 import ContactList from '@/ContactList/ContactList.jsx';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import {
   Box,
   Container,
@@ -10,7 +12,10 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import { selectLoading } from '../redux/contacts/selectors.js';
+import {
+  selectLoading,
+  selectTotalPages,
+} from '../redux/contacts/selectors.js';
 import NewContact from '../components/NewContact/NewContact.jsx';
 import SearchBox from '../components/SearchBox/SearchBox.jsx';
 import { ContactListSkeleton } from '../ui/skeleton.jsx';
@@ -18,14 +23,21 @@ import { selectTypeFilter } from '../redux/filters/selectors.js';
 import { changeTypeFilter } from '../redux/filters/slice.js';
 
 const ContactsPage = () => {
+  const [page, setPage] = useState(1);
   const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
-
+  const totalPages = useSelector(selectTotalPages);
   const typeFilter = useSelector(selectTypeFilter);
 
+  const perPage = 4;
+
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    dispatch(fetchContacts({ page, perPage }));
+  }, [dispatch, page]);
+
+  const handlePageChange = (_, value) => {
+    setPage(value);
+  };
 
   return (
     <Container maxWidth="lg">
@@ -122,6 +134,12 @@ const ContactsPage = () => {
                       color: 'primary',
                       boxShadow:
                         '0 20px 60px rgba(0,0,0,0.15), inset 0 20px 60px rgba(255, 255, 255, 0.3)',
+                      '& .MuiButtonBase-root': {
+                        borderRadius: 2,
+                      },
+                      '& .MuiButtonBase-root:hover': {
+                        backgroundColor: 'rgb(239 239 239 / 0.81)',
+                      },
                     },
                   },
                 }}
@@ -135,6 +153,13 @@ const ContactsPage = () => {
           </Box>
         </Box>
         {isLoading ? <ContactListSkeleton /> : <ContactList />}
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages}
+            onChange={handlePageChange}
+            page={page}
+          />
+        </Stack>
       </Box>
     </Container>
   );

@@ -1,6 +1,15 @@
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 450,
+      md: 600,
+      lg: 800,
+    },
+  },
+
   palette: {
     mode: 'light',
     primary: {
@@ -8,14 +17,14 @@ const theme = createTheme({
       bgColor: 'linear-gradient(135deg, #c7d2fe 0%, #dbeafe 50%, #e2e8f0 100%)',
       gold: '#ffc400',
       iconColor: '#977027',
-      white: '#ffffff',
     },
     secondary: {
-      main: '#ff1f1f',
+      main: '#ffffff',
+      submain: '#e11414',
     },
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+    fontFamily: 'Montserrat, Arial, sans-serif',
   },
   components: {
     MuiButton: {

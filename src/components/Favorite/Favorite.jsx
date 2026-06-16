@@ -9,7 +9,7 @@ import Popover from '@mui/material/Popover';
 const Favorite = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleOpen = ( event ) => {
+  const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -22,37 +22,24 @@ const Favorite = () => {
   return (
     <>
       <IconButton aria-label="favourite" color="primary" onClick={handleOpen}>
-        <Badge
-          badgeContent={favorite.length}
-          color="secondary"
-          variant="standard"
-        >
+        <Badge badgeContent={favorite.length} color="error" variant="standard">
           <FavoriteIcon />
         </Badge>
       </IconButton>
       <Popover
         open={open}
-
         anchorEl={anchorEl}
-
         onClose={handleClose}
-
         anchorOrigin={{
-
           vertical: 'bottom',
 
           horizontal: 'center',
-
         }}
-
         transformOrigin={{
-
           vertical: 'top',
 
           horizontal: 'center',
-
         }}
-
         PaperProps={{
           sx: {
             background: 'rgb(74 74 74 / 0.2)',
@@ -70,14 +57,16 @@ const Favorite = () => {
             minWidth: 320,
 
             color: '#fff',
-
           },
         }}
       >
         <Box sx={{ p: 2 }}>
           {favorite.length > 0 ? (
-            favorite.map(( item ) => (
-              <Box key={item._id} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            favorite.map((item) => (
+              <Box
+                key={item._id}
+                sx={{ display: 'flex', justifyContent: 'space-between' }}
+              >
                 <Typography>{item.name}</Typography>
                 <Typography>{item.phoneNumber}</Typography>
               </Box>

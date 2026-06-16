@@ -51,7 +51,7 @@ const RegistrationForm = ({ isLoading }) => {
       <Typography
         variant="h5"
         gutterBottom
-        sx={{ mb: 3, color: 'primary.main' }}
+        sx={{ mb: 3, color: 'secondary.main' }}
       >
         Sign Up
       </Typography>
@@ -72,22 +72,39 @@ const RegistrationForm = ({ isLoading }) => {
                 mb: 1,
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  '&:has(input:focus) .field-icon': {
+                    color: 'secondary.main',
+                    outline: 'white',
+                  },
+                }}
+              >
                 <AccountCircle
-                  sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+                  className="field-icon"
+                  sx={{
+                    color: 'action.active',
+                    mr: 1,
+                    my: 0.5,
+                    transition: 'color .2s ease-in-out',
+                  }}
                 />
                 <Field
                   as={TextField}
+                  placeholder="Your name"
                   sx={{
                     width: '100%',
                     '& .MuiInput-underline::after': {
                       borderColor: '#fff',
                     },
+                    '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+                      color: 'secondary.main',
+                    },
                   }}
                   id="name"
                   name="name"
                   type="text"
-                  label="Name"
                   onBlur={handleBlur}
                   helperText={<ErrorMessage name="name" />}
                   variant="standard"
@@ -101,22 +118,39 @@ const RegistrationForm = ({ isLoading }) => {
                 mb: 1,
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  '&:has(input:focus) .field-icon': {
+                    color: 'secondary.main',
+                    outline: 'white',
+                  },
+                }}
+              >
                 <AlternateEmailIcon
-                  sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+                  className="field-icon"
+                  sx={{
+                    color: 'action.active',
+                    mr: 1,
+                    my: 0.5,
+                    transition: 'color .2s ease-in-out',
+                  }}
                 />
                 <Field
                   as={TextField}
+                  placeholder="Your email address"
                   sx={{
                     width: '100%',
                     '& .MuiInput-underline::after': {
                       borderColor: '#fff',
                     },
+                    '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+                      color: 'secondary.main',
+                    },
                   }}
                   id="email"
                   name="email"
                   type="email"
-                  label="Email"
                   onBlur={handleBlur}
                   helperText={<ErrorMessage name="email" />}
                   variant="standard"
@@ -126,8 +160,23 @@ const RegistrationForm = ({ isLoading }) => {
             </FormControl>
 
             <FormControl sx={{ mb: 1 }} fullWidth>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <PasswordIcon sx={{ color: 'action.active', mr: 1 }} />
+              <Box
+                sx={{
+                  display: 'flex',
+                  '&:has(input:focus) .field-icon': {
+                    color: 'secondary.main',
+                    outline: 'white',
+                  },
+                }}
+              >
+                <PasswordIcon
+                  className="field-icon"
+                  sx={{
+                    color: 'action.active',
+                    mr: 1,
+                    transition: 'color .2s ease-in-out',
+                  }}
+                />
                 <Field
                   slotProps={{
                     input: {
@@ -156,11 +205,14 @@ const RegistrationForm = ({ isLoading }) => {
                     '& .MuiInput-underline::after': {
                       borderColor: '#fff',
                     },
+                    '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+                      color: 'secondary.main',
+                    },
                   }}
                   id="password"
+                  placeholder="Enter your password"
                   name="password"
                   type={showPwd ? 'text' : 'password'}
-                  label="Password"
                   onBlur={handleBlur}
                   helperText={<ErrorMessage name="password" />}
                   variant="standard"
@@ -196,7 +248,7 @@ const RegistrationForm = ({ isLoading }) => {
       </Typography>
       <Button
         variant="outlined"
-        color="primary"
+        color="secondary"
         loading={isLoading}
         fullWidth
         component={Link}

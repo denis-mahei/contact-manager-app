@@ -63,12 +63,12 @@ const LoginForm = ({ isLoading }) => {
     <AuthWrapper>
       <Typography
         sx={{
-          color: 'primary.main',
           mb: 3,
         }}
         variant="h5"
         component="h1"
         gutterBottom
+        color="secondary.main"
       >
         Sign In
       </Typography>
@@ -85,12 +85,26 @@ const LoginForm = ({ isLoading }) => {
             <FormControl
               fullWidth
               sx={{
-                mb: 1,
+                mb: 2,
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  '&:has(input:focus) .field-icon': {
+                    color: 'secondary.main',
+                    outline: 'white',
+                  },
+                }}
+              >
                 <AlternateEmailIcon
-                  sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+                  className="field-icon"
+                  sx={{
+                    color: 'action.active',
+                    mr: 1,
+                    my: 0.5,
+                    transition: 'color 0.2s ease-in-out',
+                  }}
                 />
                 <Field
                   as={TextField}
@@ -99,11 +113,13 @@ const LoginForm = ({ isLoading }) => {
                     '& .MuiInput-underline::after': {
                       borderColor: '#fff',
                     },
+                    '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+                      color: 'secondary.main',
+                    },
                   }}
                   id="email"
                   name="email"
                   type="email"
-                  label="Email"
                   onBlur={handleBlur}
                   helperText={<ErrorMessage name="email" />}
                   variant="standard"
@@ -113,8 +129,23 @@ const LoginForm = ({ isLoading }) => {
             </FormControl>
 
             <FormControl sx={{ mb: 1 }} fullWidth>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <PasswordIcon sx={{ color: 'action.active', mr: 1 }} />
+              <Box
+                sx={{
+                  display: 'flex',
+                  '&:has(input:focus) .field-icon': {
+                    color: 'secondary.main',
+                    outline: 'white',
+                  },
+                }}
+              >
+                <PasswordIcon
+                  className="field-icon"
+                  sx={{
+                    color: 'action.active',
+                    mr: 1,
+                    transition: 'color 0.2s ease-in-out',
+                  }}
+                />
                 <Field
                   slotProps={{
                     input: {
@@ -143,11 +174,14 @@ const LoginForm = ({ isLoading }) => {
                     '& .MuiInput-underline::after': {
                       borderColor: '#fff',
                     },
+                    '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+                      color: 'secondary.main',
+                    },
                   }}
                   id="password"
                   name="password"
                   type={showPwd ? 'text' : 'password'}
-                  label="Password"
+                  // label="Password"
                   onBlur={handleBlur}
                   helperText={<ErrorMessage name="password" />}
                   variant="standard"
@@ -175,7 +209,10 @@ const LoginForm = ({ isLoading }) => {
               component={Link}
               to="/forgot-password"
               variant="text"
-              sx={{ mt: 1, textTransform: 'capitalize' }}
+              sx={{
+                textTransform: 'capitalize',
+                color: 'secondary.main',
+              }}
             >
               Forgot password?
             </Button>
@@ -184,10 +221,10 @@ const LoginForm = ({ isLoading }) => {
       </Formik>
       <Typography
         variant="body2"
-        color="text.secondary"
+        color="secondary.main"
         sx={{
           textAlign: 'center',
-          my: 2,
+          mb: 2,
           position: 'relative',
         }}
       >
@@ -196,15 +233,15 @@ const LoginForm = ({ isLoading }) => {
       <Button
         type="submit"
         variant="outlined"
-        color="primary"
+        color="secondary"
         fullWidth
         loadingPosition="end"
         loading={isLoading}
         startIcon={<FcGoogle size={24} />}
         onClick={handleGoogleLogin}
         sx={{
-          mt: 2,
           py: 1,
+          mb: 2,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -220,11 +257,10 @@ const LoginForm = ({ isLoading }) => {
         component={Link}
         to="/register"
         sx={{
-          mt: 2,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          color: 'primary.main',
+          color: 'secondary.main',
           textTransform: 'none',
         }}
       >

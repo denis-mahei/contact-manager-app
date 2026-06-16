@@ -42,11 +42,18 @@ const SearchBox = () => {
             color: '#676462',
             padding: '10px 14px',
           },
+          '& .MuiInput-underline:after': {
+            borderColor: 'primary',
+          },
           label: {
             color: 'rgba(255, 255, 255, 0.6)',
             '&.Mui-focused': {
-              color: 'primary.main',
+              color: 'primary',
             },
+          },
+          '& .MuiFormLabel-root': {
+            color: 'inherit',
+            opacity: 0.4,
           },
           '& .MuiFilledInput-root': {
             backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -54,7 +61,7 @@ const SearchBox = () => {
             border: '1px solid rgba(255, 255, 255, 0.2)',
             transition: 'border 0.3s ease, box-shadow 0.3s ease',
             '&:before': {
-              borderBottom: 'none',
+              borderColor: '#fff',
             },
             '&:after': {
               borderBottom: 'none',
@@ -63,11 +70,7 @@ const SearchBox = () => {
               border: '1px solid rgba(255, 255, 255, 0.3)',
             },
           },
-          '& .MuiFilledInput-root.Mui-focused': {
-            border: '1px solid #fff',
-            boxShadow: '0 0 6px 2px rgba(255, 255, 255, 0.4)',
-            backgroundColor: 'rgba(255, 255, 255, 0.09)',
-          },
+          '& .MuiFilledInput-root.Mui-focused': {},
         }}
       />
     </Box>

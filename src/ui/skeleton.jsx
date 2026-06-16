@@ -1,35 +1,44 @@
 import { Box, Skeleton } from '@mui/material';
 
 export const ContactSkeleton = () => {
-
   return (
     <Box
       sx={{
         display: 'flex',
         alignItems: 'center',
-        gap: 2,
-        p: 2,
-        borderRadius: 2,
-        backgroundColor: 'rgb(255 255 255 / 0.2)',
+        flexDirection: { xs: 'column', sm: 'row', md: 'row', lg: 'column' },
+        gap: 1,
+        py: 1,
+        px: 2,
+        borderRadius: 3,
+        border: '1px solid transparent',
+        backgroundColor: 'rgb(204 203 203 / 0.31)',
         width: '100%',
       }}
     >
-      {/* AVATAR */}
       <Skeleton variant="circular" width={80} height={80} />
-      {/* INFO BLOCK */}
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
-        {/* NAME */}
-        <Skeleton variant="text" width="40%" height={22} />
-        {/* PHONE */}
-        <Skeleton variant="text" width="30%" height={20} />
-        {/* CONTACT TYPE */}
-        <Skeleton variant="text" width="10%" height={20} />
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 1.5,
+          p: 2,
+        }}
+      >
+        <Skeleton variant="text" height={20} width={50} />
+        <Skeleton variant="text" height={20} width={50} />
+        <Skeleton variant="text" height={15} width={40} />
       </Box>
-      {/* ACTIONS */}
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: {
+            xs: 'row',
+            sm: 'column',
+            md: 'column',
+            lg: 'column',
+          },
           gap: 1,
           alignItems: 'center',
         }}
@@ -42,10 +51,8 @@ export const ContactSkeleton = () => {
   );
 };
 
-export const ContactListSkeleton = ({count = 5}) => {
+export const ContactListSkeleton = ({ count = 4 }) => {
   return Array.from({ length: count }).map((_, i) => (
-
     <ContactSkeleton key={i} />
-
   ));
-}
+};
